@@ -1,0 +1,216 @@
+@use '@/styles/forwarder' as *;
+
+.profile-page {
+  display: grid;
+  align-items: start;
+  gap: toRem(40px);
+
+  .user-data {
+    &-wrapper {
+      display: grid;
+      gap: toRem(16px);
+      padding: toRem(16px) toRem(12px) toRem(32px);
+      border-radius: toRem(12px);
+      border-color: var(--main-border-color);
+      border-width: toRem(1px);
+      border-style: solid;
+    }
+
+    &-table {
+      display: grid;
+
+      &:has(.spinner) {
+        min-height: toRem(150px);
+      }
+
+      &--identities {
+        gap: toRem(24px);
+
+        @include media-breakpoint-up(sm) {
+          padding-inline: toRem(16px);
+        }
+
+        .user-identities {
+          display: grid;
+          gap: toRem(24px);
+
+          a.button {
+            justify-self: start;
+          }
+        }
+      }
+    }
+  }
+
+  .user-informations {
+    display: grid;
+    grid-auto-rows: max-content;
+    gap: toRem(16px);
+
+    &__data-row {
+      display: grid;
+      align-items: center;
+      gap: toRem(4px);
+      min-height: toRem(24px);
+
+      &--one-liner {
+        grid-template-columns: 1fr max-content;
+      }
+
+      @include media-breakpoint-up(md) {
+        column-gap: toRem(16px);
+        grid-template-columns: 0.4fr 0.6fr;
+      }
+
+      .user-header__wrapper {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: toRem(12px);
+        border-radius: toRem(12px);
+        border-color: var(--main-border-color);
+        border-width: toRem(1px);
+        border-style: solid;
+
+        .pfp {
+          width: toRem(50px);
+          height: toRem(50px);
+          border-radius: 50%;
+        }
+      }
+
+      .input-requirement {
+        color: var(--color-18);
+        font-size: toRem(10px);
+        margin-left: toRem(4px);
+      }
+
+      .property {
+        color: var(--color-12);
+        font-size: toRem(14px);
+        line-height: 140%;
+        font-weight: 700;
+      }
+
+      .value {
+        font-size: toRem(14px);
+        line-height: 140%;
+
+        &--email {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: toRem(4px);
+
+          .status {
+            &--verified {
+              color: var(--color-10);
+            }
+
+            &--not-verified {
+              color: var(--color-12);
+            }
+          }
+        }
+
+        &--user-status {
+          justify-self: start;
+
+          &.status {
+            color: var(--pure-white);
+            font-size: toRem(12px);
+            font-weight: 700;
+            padding: toRem(4px) toRem(12px);
+            border-radius: toRem(32px);
+
+            &--active {
+              background-color: var(--color-10);
+            }
+
+            &--pending-deletion {
+              background-color: var(--color-06);
+            }
+
+            &--suspended {
+              background-color: var(--color-00);
+            }
+
+            &--deleting {
+              color: var(--color-00);
+              background-color: var(--white-02);
+            }
+          }
+        }
+
+        &.error-message {
+          color: var(--red-01);
+          font-size: toRem(12px);
+          line-height: toRem(14px);
+          margin-left: toRem(4px);
+        }
+      }
+    }
+
+    .user-deletion-data {
+      display: grid;
+      align-items: center;
+      gap: toRem(16px);
+      padding: toRem(12px);
+      border-radius: toRem(12px);
+      border-color: var(--main-border-color);
+      border-width: toRem(1px);
+      border-style: solid;
+
+      @include media-breakpoint-up(md) {
+        gap: toRem(4px);
+      }
+
+      .user-informations__data-row {
+        @include media-breakpoint-down(md) {
+          gap: toRem(4px);
+        }
+      }
+    }
+
+    &--identity {
+      gap: toRem(4px);
+      padding: toRem(16px);
+      border-radius: toRem(8px);
+      border-color: var(--main-border-color);
+      border-width: toRem(1px);
+      border-style: solid;
+
+      &.primary {
+        background-color: var(--white-03);
+      }
+
+      .divider {
+        margin: 0;
+      }
+
+      .user-informations {
+        &__header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: toRem(16px);
+
+          .svg-lock {
+            color: var(--grey-01);
+            margin: toRem(4px);
+          }
+        }
+
+        &__data-row {
+          min-height: initial;
+        }
+      }
+    }
+
+    &__error {
+      display: grid;
+      gap: toRem(8px);
+    }
+  }
+}

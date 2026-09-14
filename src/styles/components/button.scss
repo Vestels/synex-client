@@ -1,0 +1,125 @@
+@use '@/styles/forwarder' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: toRem(8px);
+
+  color: var(--pure-white);
+  font-size: toRem(16px);
+  font-weight: 700;
+
+  background-color: var(--button-primary-background);
+
+  width: auto;
+  padding: toRem(8px) toRem(24px);
+  margin: 0;
+
+  border-radius: toRem(32px);
+  border-style: solid;
+  border-width: toRem(2px);
+  border-color: transparent;
+
+  outline-offset: toRem(2px);
+  outline-width: toRem(2px);
+  outline-color: transparent;
+  outline-style: solid;
+
+  transition: var(--global-transition-time-and-function);
+  transition-property: color, background-color, margin, padding, border-radius;
+
+  box-shadow: none;
+  user-select: none;
+  hyphens: manual;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--pure-white);
+      background-color: var(--button-primary-hover);
+    }
+  }
+
+  &:active {
+    background-color: var(--color-15);
+  }
+
+  &:focus-visible {
+    outline-color: var(--color-00);
+  }
+
+  &--secondary {
+    color: var(--color-00);
+    background-color: var(--button-secondary-background);
+    border-color: var(--color-00);
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-00);
+        background-color: var(--button-secondary-hover);
+      }
+    }
+
+    &:active {
+      background-color: var(--button-secondary-active);
+    }
+  }
+
+  &--tertiary {
+    color: var(--color-00);
+    background-color: transparent;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-00);
+        background-color: var(--button-tertiary-hover);
+      }
+    }
+
+    &:active {
+      background-color: var(--button-tertiary-active);
+    }
+
+    &.active {
+      background-color: var(--button-tertiary-hover);
+      margin-right: toRem(-24px);
+      padding-right: toRem(56px);
+      border-radius: toRem(32px) 0 0 toRem(32px);
+    }
+  }
+
+  &--subtle {
+    font-size: toRem(14px);
+    color: var(--color-18);
+    background-color: transparent;
+    border: none;
+    padding: toRem(4px) toRem(8px);
+    transition: var(--global-transition-time-and-function);
+    transition-property: background-color;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-15);
+        background-color: var(--white-02);
+      }
+    }
+
+    &:active {
+      color: var(--color-15);
+      background-color: var(--white-02);
+    }
+  }
+
+  &--icon-only {
+    padding: toRem(4px);
+    border-radius: 50%;
+  }
+
+  &--disabled {
+    pointer-events: none;
+    user-select: none;
+    touch-action: none;
+  }
+}

@@ -1,0 +1,15 @@
+@use '@/styles/forwarder' as *;
+
+.not-found-page {
+  place-self: center;
+  display: grid;
+  place-items: center;
+  gap: toRem(32px);
+
+  &__label {
+  }
+
+  &__illustration {
+    max-width: toRem(180px);
+  }
+}

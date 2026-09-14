@@ -1,0 +1,87 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.changesets.outputs.published }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '26.11.1'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v2
+        with:
+          version-script: pnpm changeset version
+          publish-script: >-
+            node -e "const {execFileSync: exec} = require('node:child_process');
+            const version = require('./package.json').version;
+            const tag = 'v' + version;
+            const tags = exec('git', ['tag', '--list', 'v*', '--sort=-version:refname'], {encoding: 'utf8'}).trim().split(/\s+/).filter(Boolean);
+            if (!tags.length || tags[0] === tag) {
+              console.log('No new version to publish');
+              process.exit(0);
+            }
+            exec('pnpm', ['changeset', 'git-tag'], {stdio: 'inherit'});
+            console.log('New tag: ' + tag);"
+          pr-title: 'chore(release): version packages'
+          commit-message: 'chore(release): version packages'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          HUSKY: '0'
+
+      - name: Configure Git
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+  sync-back-to-develop:
+    needs: release
+    if: needs.release.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@://github.com"
+
+      - name: Merge main back to develop
+        run: |
+          git fetch origin main develop
+          git checkout develop
+          git pull --ff-only origin develop
+          git merge origin/main --no-edit -m "chore(sync): merge main back to develop [skip ci]"
+          git push origin develop

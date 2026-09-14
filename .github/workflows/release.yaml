@@ -1,0 +1,94 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.changesets.outputs.published }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '26.11.1'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version-script: pnpm changeset version
+          publish-script: >-
+            node -e "const fs = require('node:fs');
+            const { execFileSync } = require('node:child_process');
+            const pkg = require('./package.json');
+            const tag = 'v' + pkg.version;
+            const tagExists = execFileSync('git', ['ls-remote', '--tags', 'origin', 'refs/tags/' + tag, 'refs/tags/' + tag + '^{}'], { encoding: 'utf8' }).trim();
+            let releaseExists = false;
+            try {
+              execFileSync('gh', ['release', 'view', tag], { stdio: 'ignore' });
+              releaseExists = true;
+            } catch {}
+            if (tagExists || releaseExists) {
+              console.log('Release already exists; skipping ' + tag);
+              process.exit(0);
+            }
+            fs.appendFileSync(process.env.CHANGESETS_OUTPUT, JSON.stringify({ type: 'git-tag', tag, packageName: pkg.name }) + '\n');
+            console.log('Queued release: ' + tag);"
+          pr-title: 'chore(release): version packages'
+          commit-message: 'chore(release): version packages'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: '0'
+
+      - name: Configure Git
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+  sync-back-to-develop:
+    needs: release
+    if: needs.release.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@://github.com"
+
+      - name: Merge main back to develop
+        run: |
+          git fetch origin main develop
+          git checkout develop
+          git pull --ff-only origin develop
+          git merge origin/main --no-edit -m "chore(sync): merge main back to develop [skip ci]"
+          git push origin develop

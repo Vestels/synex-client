@@ -1,0 +1,158 @@
+@use '@/styles/forwarder' as *;
+
+.main {
+  display: grid;
+  align-items: start;
+  gap: toRem(24px);
+  padding: calc(toRem(32px) + var(--app-header-height)) toRem(16px);
+  width: min(100%, var(--app-main-max-width));
+
+  &:has(.side-navigation--open) {
+    .main-container {
+      pointer-events: none;
+      margin-left: 80%;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    &:has(.side-navigation--open) {
+      .main-container {
+        margin-left: 55%;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    &:has(.side-navigation--open) {
+      .main-container {
+        margin-left: 0;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: 0.4fr 1fr;
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: 0.3fr 1fr;
+  }
+
+  &-container {
+    position: relative;
+    display: grid;
+    align-items: start;
+    width: min(100%, var(--app-content-max-width));
+    min-height: 100%;
+    border-radius: toRem(8px);
+    padding: toRem(36px) toRem(16px);
+    box-shadow: var(--shadow-02);
+    background-color: var(--pure-white);
+    border-color: var(--main-border-color);
+    border-width: toRem(1px);
+    border-style: solid;
+    transition: var(--global-transition-time-and-function-extended);
+    transition-property: margin;
+
+    @include media-breakpoint-up(md) {
+      padding-inline: toRem(32px);
+    }
+
+    .unsaved-changes {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      transform: translateY(150%);
+      transition: var(--global-transition-time-and-function);
+      transition-property: transform;
+      pointer-events: none;
+      z-index: 1;
+
+      @include media-breakpoint-up(md) {
+        left: 50%;
+        width: min(calc(100% - #{toRem(32px)}), #{toRem(680px)});
+        transform: translateY(150%) translateX(-50%);
+        bottom: toRem(8px);
+        padding: toRem(16px);
+      }
+
+      &.is-visible {
+        transform: translateY(0);
+        pointer-events: auto;
+
+        @include media-breakpoint-up(md) {
+          transform: translateY(0) translateX(-50%);
+        }
+      }
+
+      &-panel {
+        display: grid;
+        place-items: center;
+        min-height: toRem(100px);
+        gap: toRem(16px);
+        padding: toRem(24px);
+        background-color: var(--pure-white);
+        box-shadow: var(--shadow-03);
+        border-radius: toRem(8px) toRem(8px) 0 0;
+        border-color: var(--color-11);
+        border-width: toRem(1px);
+        border-style: solid;
+
+        @include media-breakpoint-up(sm) {
+          grid-template-columns: minmax(0, 1fr) auto;
+          border-radius: toRem(8px);
+        }
+
+        &__status-label {
+          text-align: center;
+
+          @include media-breakpoint-up(sm) {
+            text-align: left;
+            justify-self: start;
+          }
+        }
+
+        &__actions {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: toRem(8px);
+
+          .button {
+            min-width: toRem(112px);
+          }
+        }
+      }
+    }
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: toRem(8px);
+    color: var(--color-00);
+    letter-spacing: toRem(1px);
+    border-radius: toRem(12px);
+
+    @include media-breakpoint-down(md) {
+      font-size: toRem(24px);
+      line-height: toRem(32px);
+    }
+  }
+
+  &:has(.side-navigation--open) {
+    .unsaved-changes {
+      transform: translateY(150%);
+    }
+  }
+}
+
+.divider {
+  width: 100%;
+  height: toRem(1px);
+  border-radius: toRem(1px);
+  border: none;
+  background-color: var(--color-11);
+  margin: toRem(16px) 0;
+}

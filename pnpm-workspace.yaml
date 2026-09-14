@@ -1,0 +1,7 @@
+allowBuilds:
+  '@parcel/watcher': true
+  'unrs-resolver': true
+  'sharp': true
+  '@swc/core': true
+  'esbuild': true
+  browser-tabs-lock: true

@@ -72,9 +72,10 @@
       pointer-events: none;
       z-index: 1;
 
-      @include media-breakpoint-up(sm) {
-        width: min(calc(100% - #{toRem(32px)}), var(--app-content-max-width));
-        left: initial;
+      @include media-breakpoint-up(md) {
+        width: min(calc(100% - #{toRem(32px)}), #{toRem(560px)});
+        left: 50%;
+        transform: translateX(-50%);
         bottom: toRem(8px);
         padding: toRem(16px);
       }
@@ -82,6 +83,10 @@
       &.is-visible {
         transform: translateY(0);
         pointer-events: auto;
+
+        @include media-breakpoint-up(md) {
+          transform: translateY(0) translateX(-50%);
+        }
       }
 
       &-panel {
@@ -121,6 +126,12 @@
   .section-title {
     color: var(--color-00);
     letter-spacing: toRem(1px);
+  }
+
+  &:has(.side-navigation--open) {
+    .unsaved-changes {
+      transform: translateY(150%);
+    }
   }
 }
 

@@ -27,7 +27,7 @@ export default function UserActionButton({ children, onClick }: UserActionButton
       }
 
       // TODO - remove later
-      await delay(2000);
+      await delay(500);
 
       router.refresh();
     } catch (error) {

@@ -28,7 +28,7 @@
     "PROFILE": {
       "TITLE": "Profil",
       "ME": {
-        "EMAIL_VERIFIED": "Email megerősítve",
+        "EMAIL_VERIFIED": "Email megerősítve:",
         "EMAIL": "Email:",
         "REGISTERED": "Regisztrált:",
         "LAST_LOGIN": "Utolsó belépés:",

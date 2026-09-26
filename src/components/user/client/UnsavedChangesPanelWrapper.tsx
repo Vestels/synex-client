@@ -1,6 +1,6 @@
 "use client";
 
-import UnsavedChangesPanel from "@/app/components/user/client/UnsavedChangesPanel";
+import UnsavedChangesPanel from "@/components/user/client/UnsavedChangesPanel";
 import { useUnsavedChangesStore } from "@/stores/unsaved-changes.store";
 
 export default function UnsavedChangesPanelWrapper() {

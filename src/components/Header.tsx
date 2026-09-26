@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Button from "@/app/components/Button";
+import Button from "@/components/Button";
 
 type HeaderProps = {
   isMobile: boolean;

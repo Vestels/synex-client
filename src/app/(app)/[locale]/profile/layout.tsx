@@ -1,4 +1,4 @@
-import UnsavedChangesPanelWrapper from "@/app/components/user/client/UnsavedChangesPanelWrapper";
+import UnsavedChangesPanelWrapper from "@/components/user/client/UnsavedChangesPanelWrapper";
 
 export default async function ProfileLayout({
   children,

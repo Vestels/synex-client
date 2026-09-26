@@ -2,8 +2,8 @@
 
 import { useTransition } from "react";
 import { deleteCurrentUserAction, requestClearDeleteForCurrentUserAction } from "@/actions/user.actions";
-import Button from "@/app/components/Button";
-import SpinnerSvg from "@/app/components/svgs/SpinnerSvg";
+import Button from "@/components/Button";
+import SpinnerSvg from "@/components/svgs/SpinnerSvg";
 import { useRouter } from "next/navigation";
 
 interface UserActionButtonProps {

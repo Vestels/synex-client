@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
-import UserData from "@/app/components/user/server/UserData";
-import UserProfileData from "@/app/components/user/server/UserProfileData";
-import UserIdentitiesData from "@/app/components/user/server/UserIdentitiesData";
-import UserPreferencesData from "@/app/components/user/server/UserPreferencesData";
-import SpinnerSvg from "@/app/components/svgs/SpinnerSvg";
+import UserData from "@/components/user/server/UserData";
+import UserProfileData from "@/components/user/server/UserProfileData";
+import UserIdentitiesData from "@/components/user/server/UserIdentitiesData";
+import UserPreferencesData from "@/components/user/server/UserPreferencesData";
+import SpinnerSvg from "@/components/svgs/SpinnerSvg";
 
 export default async function UserProfileClient() {
   const translate = await getTranslations("APP.PROFILE");

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Button from "@/app/components/Button";
+import Button from "@/components/Button";
 import Image from "next/image";
 
 export default function Error({ reset }: { error: Error & { digest?: string }; reset: () => void }) {

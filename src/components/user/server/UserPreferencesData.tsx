@@ -1,5 +1,5 @@
 import { UserPreference } from "@/interfaces/user.interface";
-import UserPreferencesForm from "@/app/components/user/client/UserPreferencesForm";
+import UserPreferencesForm from "@/components/user/client/UserPreferencesForm";
 import { getCurrentUserPreferencesAction } from "@/actions/user.actions";
 
 export default async function UserPreferencesData() {

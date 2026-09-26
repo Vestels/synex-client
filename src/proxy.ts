@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth0 } from "@/libs/auth0.lib";
 import { routing } from "@/i18n/routing";
-import { AUTH_ROUTES } from "@/app/constants/routes";
+import { AUTH_ROUTES } from "@/constants/routes";
 import createMiddleware from "next-intl/middleware";
 
 const handleI18nRouting = createMiddleware(routing);

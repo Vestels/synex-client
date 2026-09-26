@@ -1,4 +1,4 @@
-export default function CloseSvg({ className, color = "currentColor" }: { className?: string; color?: string }) {
+export default function XMarkSvg({ className, color = "currentColor" }: { className?: string; color?: string }) {
   return (
     <svg
       className={`svg svg-check ${className}`}

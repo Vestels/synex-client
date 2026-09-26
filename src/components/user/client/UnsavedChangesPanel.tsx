@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Button from "@/app/components/Button";
+import Button from "@/components/Button";
 import { useUnsavedChangesStore } from "@/stores/unsaved-changes.store";
 import SpinnerSvg from "../../svgs/SpinnerSvg";
 

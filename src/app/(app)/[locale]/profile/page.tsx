@@ -1,4 +1,4 @@
-import UserProfileClient from "@/app/components/user/server/UserProfileWrapper";
+import UserProfileClient from "@/components/user/server/UserProfileWrapper";
 
 export const dynamic = "force-dynamic";
 

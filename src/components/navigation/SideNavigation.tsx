@@ -1,9 +1,9 @@
 "use client";
 
-import { APP_ROUTES, AUTH_ROUTES } from "@/app/constants/routes";
+import { APP_ROUTES, AUTH_ROUTES } from "@/constants/routes";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
-import Button from "@/app/components/Button";
+import Button from "@/components/Button";
 
 type SideNaviogationProps = {
   isOpen: boolean;

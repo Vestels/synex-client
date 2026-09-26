@@ -1,4 +1,4 @@
-export default function CheckSvg({ className, color = "currentColor" }: { className?: string; color?: string }) {
+export default function CheckMarkSvg({ className, color = "currentColor" }: { className?: string; color?: string }) {
   return (
     <svg
       className={`svg svg-check ${className}`}

@@ -4,7 +4,7 @@ import { getLocale, getMessages } from "next-intl/server";
 import { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { getCurrentUserAction } from "@/actions/user.actions";
-import NavigationShell from "@/app/components/navigation/NavigationShell";
+import NavigationShell from "@/components/navigation/NavigationShell";
 
 // TODO
 export const metadata: Metadata = {

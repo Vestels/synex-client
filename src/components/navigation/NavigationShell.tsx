@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import Header from "@/app/components/Header";
-import SideNavigation from "@/app/components/navigation/SideNavigation";
+import Header from "@/components/Header";
+import SideNavigation from "@/components/navigation/SideNavigation";
 
 export default function NavigationShell({ children }: Readonly<{ children: React.ReactNode }>) {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);

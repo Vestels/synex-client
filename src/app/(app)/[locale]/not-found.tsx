@@ -1,8 +1,8 @@
 "use client";
 
-import { APP_ROUTES } from "@/app/constants/routes";
+import { APP_ROUTES } from "@/constants/routes";
 import { useTranslations } from "next-intl";
-import Button from "@/app/components/Button";
+import Button from "@/components/Button";
 import Image from "next/image";
 
 export default function NotFound() {

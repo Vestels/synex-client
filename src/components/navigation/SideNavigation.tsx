@@ -6,17 +6,18 @@ import { usePathname } from "@/i18n/navigation";
 import Button from "@/components/Button";
 
 type SideNaviogationProps = {
+  ref?: React.Ref<HTMLElement>;
   isOpen: boolean;
   isMobile: boolean;
 };
 
-export default function SideNavigation({ isOpen, isMobile }: SideNaviogationProps) {
+export default function SideNavigation({ ref, isOpen, isMobile }: SideNaviogationProps) {
   const translate = useTranslations("APP");
   const pathname = usePathname();
 
   return (
     <>
-      <aside className={`side-navigation ${isMobile && isOpen ? "side-navigation--open" : ""}`}>
+      <aside className={`side-navigation ${isMobile && isOpen ? "side-navigation--open" : ""}`} ref={ref}>
         <nav>
           <ul className="side-navigation__list">
             <li className="side-navigation__list-item">
@@ -37,7 +38,9 @@ export default function SideNavigation({ isOpen, isMobile }: SideNaviogationProp
             </li>
           </ul>
           <hr className="divider" />
-          <a href={`/${AUTH_ROUTES.LOGOUT}`} className="button button--primary">{translate("ACTIONS.LOGOUT")}</a>
+          <a href={`/${AUTH_ROUTES.LOGOUT}`} className="button button--primary">
+            {translate("ACTIONS.LOGOUT")}
+          </a>
         </nav>
       </aside>
     </>

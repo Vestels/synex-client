@@ -4,16 +4,17 @@ import { useTranslations } from "next-intl";
 import Button from "@/components/Button";
 
 type HeaderProps = {
+  ref?: React.Ref<HTMLElement>;
   isMobile: boolean;
   isSideNavigationOpen: boolean;
   onMenuOpen: () => void;
 };
 
-export default function Header({ isMobile, isSideNavigationOpen, onMenuOpen }: HeaderProps) {
+export default function Header({ ref, isMobile, isSideNavigationOpen, onMenuOpen }: HeaderProps) {
   const translate = useTranslations("APP");
 
   return (
-    <header className="header">
+    <header className="header" ref={ref}>
       <div className="header__wrapper">
         {isMobile && (
           <Button className="header__menu-button" onClick={onMenuOpen}>

@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useTransition } from "react";
 import { deleteCurrentUserAction, requestClearDeleteForCurrentUserAction } from "@/actions/user.actions";
 import Button from "@/app/components/Button";
 import SpinnerSvg from "@/app/components/svgs/SpinnerSvg";
 import { useRouter } from "next/navigation";
-import { delay } from "@/utils/delay.util";
 
 interface UserActionButtonProps {
   children: React.ReactNode;
@@ -14,27 +13,22 @@ interface UserActionButtonProps {
 
 export default function UserActionButton({ children, onClick }: UserActionButtonProps) {
   const router = useRouter();
-  const [isPending, updatePending] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
-  const handleClick = async () => {
-    updatePending(true);
+  const handleClick = () => {
+    startTransition(async () => {
+      try {
+        if ("delete" === onClick) {
+          await deleteCurrentUserAction();
+        } else {
+          await requestClearDeleteForCurrentUserAction();
+        }
 
-    try {
-      if ("delete" === onClick) {
-        await deleteCurrentUserAction();
-      } else {
-        await requestClearDeleteForCurrentUserAction();
+        router.refresh();
+      } catch (error) {
+        console.error(error);
       }
-
-      // TODO - remove later
-      await delay(500);
-
-      router.refresh();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      updatePending(false);
-    }
+    });
   };
 
   return (

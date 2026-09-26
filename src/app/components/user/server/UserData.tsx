@@ -1,13 +1,11 @@
 import { getTranslations } from "next-intl/server";
-import { User } from "@/interfaces/user.interface";
 import { formatDate } from "@/utils/format-date.util";
 // import UserInfoData from "@/app/components/user/server/UserInfoData";
 import UserActionButton from "@/app/components/user/client/UserActionButton";
 import { getCurrentUserAction } from "@/actions/user.actions";
 
 export default async function UserData() {
-  const translate = await getTranslations("APP");
-  const user: User = await getCurrentUserAction();
+  const [translate, user] = await Promise.all([getTranslations("APP"), getCurrentUserAction()]);
 
   return (
     <>

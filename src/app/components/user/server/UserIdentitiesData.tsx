@@ -1,11 +1,9 @@
 import React from "react";
-import { UserIdentity } from "@/interfaces/user.interface";
 import { getTranslations } from "next-intl/server";
 import { getCurrentUserIdentitiesAction } from "@/actions/user.actions";
 
 export default async function UserIdentitiesData() {
-  const translate = await getTranslations("APP");
-  const userIdentities: UserIdentity[] = await getCurrentUserIdentitiesAction();
+  const [translate, userIdentities] = await Promise.all([getTranslations("APP"), getCurrentUserIdentitiesAction()]);
 
   return (
     <>

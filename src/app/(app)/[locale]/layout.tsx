@@ -24,8 +24,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   await getCurrentUserAction();
-  const messages = await getMessages();
-  const locale = await getLocale();
+
+  const [messages, locale] = await Promise.all([getMessages(), getLocale()]);
 
   return (
     <html lang={locale} data-theme="light" data-scroll-behavior="smooth">

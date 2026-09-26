@@ -73,9 +73,9 @@
       z-index: 1;
 
       @include media-breakpoint-up(md) {
-        width: min(calc(100% - #{toRem(32px)}), #{toRem(560px)});
         left: 50%;
-        transform: translateX(-50%);
+        width: min(calc(100% - #{toRem(32px)}), #{toRem(560px)});
+        transform: translateY(150%) translateX(-50%);
         bottom: toRem(8px);
         padding: toRem(16px);
       }

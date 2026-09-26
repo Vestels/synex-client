@@ -1,0 +1,111 @@
+{
+  "APP": {
+    "APP_NAME": "App Logo",
+    "MAIN_PAGE": {
+      "TITLE": "Áttekintő"
+    },
+    "ROUTES": {
+      "HOME": "Áttekintés",
+      "PROFILE": "Profil"
+    },
+    "ACTIONS": {
+      "LOGOUT": "Kijelentkezés",
+      "PROFILE": {
+        "RESTORE": "Törlés visszavonása",
+        "DELETE": "Fiók törlése",
+        "SAVE": "Mentés",
+        "CANCEL": "Elvetés"
+      },
+      "ERROR": {
+        "RETRY": "Újrapróbálom",
+        "BACK_TO_HOME": "Főoldalra"
+      }
+    },
+    "REQUIREMENTS": {
+      "REQUIRED": "Kötelező",
+      "OPTIONAL": "Opcionális"
+    },
+    "PROFILE": {
+      "TITLE": "Profil",
+      "ME": {
+        "EMAIL_VERIFIED": "Email megerősítve:",
+        "EMAIL": "Email:",
+        "REGISTERED": "Regisztrált:",
+        "LAST_LOGIN": "Utolsó belépés:",
+        "LAST_ACTIVE": "Utoljára aktív:",
+        "LAST_UPDATED_AT": "Utoljára frissítve:",
+        "ACCOUNT_STATUS": "Fiók státusz:",
+        "DELETION_REQUESTED_AT": "Törlés kérelmezve:",
+        "DELETION_SCHEDULED_AT": "Tényleges törlés:"
+      },
+      "PERSONAL": {
+        "TITLE": "Személyes",
+        "BIRTH_DATE": "Születési idő:",
+        "GENDER": {
+          "LABEL": "Nem:",
+          "PLACEHOLDER": "Válassz"
+        },
+        "NICKNAME": "Becenév:",
+        "FIRSTNAME": "Keresztnév:",
+        "LASTNAME": "Vezetéknév:"
+      },
+      "PREFERENCES": {
+        "TITLE": "Preferenciák",
+        "LANGUAGE": "Nyelv:",
+        "UNIT_SYSTEM": "Mértékegység-rendszer:",
+        "THEME": "Téma:",
+        "EMAIL_NOTIFICATIONS": "Email értesítések:",
+        "PUSH_NOTIFICATIONS": "Push étesítések:"
+      },
+      "IDENTITIES": {
+        "TITLE": "Bejelentkezési módok",
+        "CREATED_AT": "Létrehozva:",
+        "LAST_USED_AT": "Utolsó használat:"
+      },
+      "UNSAVED_CHANGES_PANEL": {
+        "LABEL": "Nem mentett módosítások"
+      }
+    },
+    "ENUMS": {
+      "USER_STATUS": {
+        "ACTIVE": "Aktív",
+        "SUSPENDED": "Felfüggesztett",
+        "PENDING_DELETION": "Törlésre vár",
+        "DELETING": "Törlés folyamatban"
+      },
+      "GENDER": {
+        "MALE": "Férfi",
+        "FEMALE": "Nő"
+      },
+      "UNIT_SYSTEM": {
+        "METRIC": "Metrikus - (kg, cm)",
+        "IMPERIAL": "Angolszász - (lb, ft/in)"
+      },
+      "LANGUAGE": {
+        "HU": "Magyar",
+        "EN": "Angol"
+      },
+      "THEME": {
+        "LIGHT": "Világos",
+        "DARK": "Sötét"
+      },
+      "IDENTITY_PROVIDER": {
+        "PASSWORD": "Jelszó"
+      }
+    },
+    "STATUS": {
+      "ERROR": "Hoppá. Valami hiba történt. Próbáld újra.",
+      "NOT_FOUND": "Légüres térbe kerültél."
+    },
+    "COOKIE_CONSENT": {
+      "CONTENT": {
+        "ONE": "A weboldal működéséhez és a biztonságos bejelentkezéshez szükséges cookie-kat használunk. Jelenleg nincs analitika vagy marketing célú adatgyűjtés, és ilyen célból nem osztunk meg adatokat harmadik felekkel."
+      },
+      "ACTIONS": {
+        "ACCEPTS": "Elfogadás",
+        "DECLINE": "Elutasítás",
+        "ONLY_ACCEPT": "Értem"
+      }
+    }
+  }
+}

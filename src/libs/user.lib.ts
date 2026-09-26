@@ -1,4 +1,11 @@
-import { User, UserAuth0Info, UserIdentity, UserPreference, UserProfile } from "@/interfaces/user.interface";
+import {
+  User,
+  UserAppBehaviourPreferences,
+  UserAuth0Info,
+  UserIdentity,
+  UserPreference,
+  UserProfile,
+} from "@/interfaces/user.interface";
 import { apiClient, ApiError } from "@/libs/api-client.lib";
 import { API_ROUTES, AUTH_ROUTES } from "@/constants/routes";
 import { redirect } from "next/navigation";
@@ -30,11 +37,17 @@ export async function updateCurrentUserProfile(profileData: UserProfileUpdate): 
   });
 }
 
-export async function getCurrentUserPreference(): Promise<UserPreference> {
+export async function getCurrentUserPreferences(): Promise<UserPreference> {
   return await apiClient<UserPreference>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.PREFERENCES}`);
 }
 
-export async function updateCurrentUserPreference(preferenceData: UserPreferencesUpdate): Promise<void> {
+export async function getCurrentUserAppBehaviourPreferences(): Promise<UserAppBehaviourPreferences> {
+  return await apiClient<UserAppBehaviourPreferences>(
+    `${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.PREFERENCES}/${API_ROUTES.USERS.APP_PREFERENCES}`,
+  );
+}
+
+export async function updateCurrentUserPreferences(preferenceData: UserPreferencesUpdate): Promise<void> {
   await apiClient<void>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.PREFERENCES}`, {
     method: "PATCH",
     body: preferenceData,

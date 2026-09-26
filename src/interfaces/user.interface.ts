@@ -1,4 +1,4 @@
-import { Gender, Theme, UnitSystem, UserStatus } from "@/enums/user.enum";
+import { Gender, Language, Theme, UnitSystem, UserStatus } from "@/enums/user.enum";
 
 export interface CurrentUser {
   user: User;
@@ -32,12 +32,15 @@ export interface UserProfile {
   gender: Gender;
 }
 
-export interface UserPreference {
-  language: string;
+export interface UserPreference extends UserAppBehaviourPreferences {
   unitSystem: UnitSystem;
-  theme: Theme;
   emailNotifications: boolean;
   pushNotifications: boolean;
+}
+
+export interface UserAppBehaviourPreferences {
+  language: Language;
+  theme: Theme;
 }
 
 export interface UserIdentity {

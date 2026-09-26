@@ -16,6 +16,7 @@ export const API_ROUTES = {
     INFO: "info",
     PROFILE: "profile",
     PREFERENCES: "preferences",
+    APP_PREFERENCES: "app",
     IDENTITIES: "identities",
     CANCEL_DELETE: "deletion/cancel"
   },

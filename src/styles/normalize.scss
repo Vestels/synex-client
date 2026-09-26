@@ -33,23 +33,7 @@ summary,
 
 html {
   scrollbar-width: thin;
-
-  scrollbar-gutter: stable;
 }
-
-body {
-  scrollbar-gutter: stable;
-}
-
-// html.cookie-consent-is-open,
-// body.cookie-consent-is-open {
-//   overflow: hidden;
-//   overscroll-behavior: none;
-// }
-
-// body.cookie-consent-is-open {
-//   touch-action: none;
-// }
 
 ::-webkit-scrollbar {
   width: toRem(5px);
@@ -86,6 +70,7 @@ body {
 
 body {
   display: grid;
+  grid-auto-rows: max-content;
   place-items: start center;
   font-family: "-apple-system, BlinkMacSystemFont", sans-serif;
   font-size: 100%; // 1rem (16px)
@@ -98,13 +83,6 @@ body {
   background-color: var(--main-background-color);
   color: var(--text-color-primary);
 }
-
-// html:has(.side-navigation--open),
-// body:has(.side-navigation--open) {
-//   @include media-breakpoint-down(md) {
-//     overflow: hidden;
-//   }
-// }
 
 h1,
 h2,

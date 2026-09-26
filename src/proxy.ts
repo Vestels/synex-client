@@ -13,16 +13,16 @@ export async function proxy(request: NextRequest) {
     return auth0.middleware(request);
   }
 
-  const i18nResponse = handleI18nRouting(request);
-
-  if (i18nResponse.status >= 300 && i18nResponse.status < 400) {
-    return i18nResponse;
-  }
-
   const session = await auth0.getSession();
 
   if (!session) {
     return NextResponse.redirect(new URL(`/${AUTH_ROUTES.LOGIN}`, request.url));
+  }
+
+  const i18nResponse = handleI18nRouting(request);
+
+  if (i18nResponse.status >= 300 && i18nResponse.status < 400) {
+    return i18nResponse;
   }
 
   return NextResponse.next();

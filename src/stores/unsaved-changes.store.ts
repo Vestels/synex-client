@@ -1,4 +1,3 @@
-import { delay } from "@/utils/delay.util";
 import { create } from "zustand";
 
 export type FormKey = "user" | "preferences" | "identities";
@@ -70,7 +69,6 @@ export const useUnsavedChangesStore = create<UnsavedChangesState>((set, get) => 
       await Promise.all(Array.from(changedForms).map((key) => saveFunctions.get(key)?.()));
 
       set({ changedForms: new Set() });
-      delay(2000);
     } finally {
       set({ isSaving: false });
     }

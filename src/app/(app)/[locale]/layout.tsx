@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { getCurrentUserAction } from "@/actions/user.actions";
 import NavigationShell from "@/components/navigation/NavigationShell";
+import CookieConsentGate from "@/components/CookieConsentGate";
 
 // TODO
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <NavigationShell>{children}</NavigationShell>
+          <CookieConsentGate />
         </NextIntlClientProvider>
       </body>
     </html>

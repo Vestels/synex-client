@@ -3,6 +3,7 @@
 import { APP_ROUTES, AUTH_ROUTES } from "@/constants/routes";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import { openCookieSettings } from "@/utils/cookie-consent-util";
 import Button from "@/components/Button";
 
 type SideNaviogationProps = {
@@ -10,6 +11,11 @@ type SideNaviogationProps = {
   isOpen: boolean;
   isMobile: boolean;
 };
+
+const currentYear = new Intl.DateTimeFormat("hu-HU", {
+  year: "numeric",
+  timeZone: "Europe/Budapest",
+}).format(new Date());
 
 export default function SideNavigation({ ref, isOpen, isMobile }: SideNaviogationProps) {
   const translate = useTranslations("APP");
@@ -38,10 +44,19 @@ export default function SideNavigation({ ref, isOpen, isMobile }: SideNaviogatio
             </li>
           </ul>
           <hr className="divider" />
-          <a href={`/${AUTH_ROUTES.LOGOUT}`} className="button button--primary">
+          <a href={`/${AUTH_ROUTES.LOGOUT}`} className="button button--primary button--logout">
             {translate("ACTIONS.LOGOUT")}
           </a>
         </nav>
+
+        <hr className="divider" />
+        <div className="side-navigation__footer">
+          <button className="cookie-consent-settings-button" onClick={openCookieSettings} type="button">
+            Süti beállítások
+          </button>
+          {/* TODO */}
+          <span>&copy; {currentYear} Placeholder</span>
+        </div>
       </aside>
     </>
   );

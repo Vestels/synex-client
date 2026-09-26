@@ -9,6 +9,7 @@
 
   &:has(.side-navigation--open) {
     .main-container {
+      pointer-events: none;
       margin-left: 80%;
     }
   }

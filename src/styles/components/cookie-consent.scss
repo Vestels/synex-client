@@ -1,0 +1,50 @@
+@use "@/styles/forwarder" as *;
+
+.cookie-consent {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: end center;
+  background-color: rgba(18, 25, 66, 0.25);
+  z-index: 100;
+
+  @include media-breakpoint-up(sm) {
+    padding: toRem(32px);
+  }
+
+  &__wrapper {
+    display: grid;
+    place-items: center;
+    width: min(100%, #{toRem(600px)});
+    border-radius: toRem(8px);
+    padding: toRem(32px) toRem(16px);
+    background-color: var(--pure-white);
+    border-color: var(--main-border-color);
+    border-width: toRem(1px);
+    border-style: solid;
+
+    @include media-breakpoint-up(sm) {
+      padding: toRem(32px);
+    }
+  }
+
+  &__content {
+    display: grid;
+    gap: toRem(24px);
+  }
+
+  &__sheet {
+    font-size: toRem(12px);
+    color: var(--color-00);
+  }
+
+  &__actions {
+    display: grid;
+    gap: toRem(8px);
+
+    @include media-breakpoint-up(sm) {
+      gap: toRem(32px);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}

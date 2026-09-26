@@ -3,15 +3,22 @@
 import { useEffect, useRef, useState } from "react";
 import { UserProfile } from "@/interfaces/user.interface";
 import { Gender } from "@/enums/user.enum";
-import { useUnsavedChanges } from "@/contexts/UnsavedChangesContext";
 import { useTranslations } from "next-intl";
 import { getChangedFields, handleUpdateField } from "@/utils/form.util";
+import { useUnsavedChangesStore } from "@/stores/unsaved-changes.store";
+import { updateCurrentUserProfileAction } from "@/actions/user.actions";
+import { useRouter } from "next/navigation";
 
 export default function UserProfileForm({ initialPreferences }: { initialPreferences: UserProfile }) {
+  const router = useRouter();
   const translate = useTranslations("APP");
   const [formData, setFormData] = useState<UserProfile>(initialPreferences);
-  const { registerForm, unregisterForm, markChanged, markSaved } = useUnsavedChanges();
   const formDataRef = useRef(formData);
+
+  const registerForm = useUnsavedChangesStore((state) => state.registerForm);
+  const unregisterForm = useUnsavedChangesStore((state) => state.unregisterForm);
+  const markChanged = useUnsavedChangesStore((state) => state.markChanged);
+  const markSaved = useUnsavedChangesStore((state) => state.markSaved);
 
   useEffect(() => {
     formDataRef.current = formData;
@@ -31,8 +38,8 @@ export default function UserProfileForm({ initialPreferences }: { initialPrefere
 
       async () => {
         const changedFields = getChangedFields(initialPreferences, formDataRef.current);
-        // await updateUser(changedFields);
-        console.log(changedFields);
+        await updateCurrentUserProfileAction(changedFields);
+        router.refresh();
       },
 
       () => {
@@ -44,7 +51,7 @@ export default function UserProfileForm({ initialPreferences }: { initialPrefere
     return () => {
       unregisterForm("user");
     };
-  }, [registerForm, unregisterForm, initialPreferences]);
+  }, [registerForm, unregisterForm, initialPreferences, router]);
 
   return (
     <div className="user-informations">

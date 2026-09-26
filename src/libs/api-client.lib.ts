@@ -10,7 +10,11 @@ export class ApiError extends Error {
   }
 }
 
-export async function apiClient<T>(endpoint: string, options?: RequestInit): Promise<T> {
+type ApiRequestOptions = Omit<RequestInit, "body"> & {
+  body?: unknown;
+};
+
+export async function apiClient<T>(endpoint: string, options?: ApiRequestOptions): Promise<T> {
   const { token } = await auth0.getAccessToken();
 
   const url = `${process.env.NEXT_API_GATEWAY_URL}/${endpoint}`;
@@ -18,9 +22,11 @@ export async function apiClient<T>(endpoint: string, options?: RequestInit): Pro
   const response = await fetch(url, {
     ...options,
     headers: {
+      "Content-Type": "application/json",
       ...options?.headers,
       Authorization: `Bearer ${token}`,
     },
+    body: options?.body !== undefined ? JSON.stringify(options.body) : undefined,
   });
 
   if (!response.ok) {

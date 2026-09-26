@@ -1,13 +1,14 @@
-@use "@/styles/base/header";
+@use "@/styles/normalize";
+
+@use "@/styles/base/layout";
 @use "@/styles/base/main";
 @use "@/styles/base/error";
 @use "@/styles/base/not-found";
-@use "@/styles/base/normalize";
-@use "@/styles/base/layout";
-@use "@/styles/base/user-informations";
 
+@use "@/styles/components/header";
 @use "@/styles/components/side-navigation";
+@use "@/styles/components/spinner";
 @use "@/styles/components/button";
 @use "@/styles/components/input";
-@use "@/styles/components/switch";
-@use "@/styles/components/spinner";
+
+@use "@/styles/shared/user-informations";

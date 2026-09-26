@@ -29,7 +29,7 @@
     position: sticky;
     top: calc(var(--app-header-height) + #{toRem(40px)});
     max-height: calc(100vh - var(--app-header-height) - #{toRem(80px)});
-    padding: toRem(4px) toRem(24px) toRem(4px) toRem(4px);
+    padding: toRem(4px) toRem(24px) toRem(48px) toRem(4px);
     transform: translate(0);
     box-shadow: none;
   }
@@ -61,22 +61,13 @@
     text-align: right;
 
     .cookie-consent-settings-button {
+      width: auto;
       justify-self: end;
-      font-size: toRem(14px);
-      color: var(--color-00);
-      background-color: transparent;
-      border: 0;
-      padding: toRem(4px) toRem(8px);
-      border-radius: toRem(32px);
       margin-bottom: toRem(16px);
-      transition: var(--global-transition-time-and-function);
-      transition-property: background-color;
-      cursor: pointer;
 
-      @media (hover: hover) {
-        &:hover {
-          background-color: var(--white-02);
-        }
+      .svg-cookie {
+        width: toRem(24px);
+        height: toRem(24px);
       }
     }
   }

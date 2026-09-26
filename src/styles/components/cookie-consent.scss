@@ -36,6 +36,7 @@
   &__sheet {
     font-size: toRem(12px);
     color: var(--color-00);
+    hyphens: manual;
   }
 
   &__actions {

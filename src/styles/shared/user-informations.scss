@@ -34,6 +34,12 @@
       grid-template-columns: 0.4fr 0.6fr;
     }
 
+    .input-requirement {
+      color: var(--color-18);
+      font-size: toRem(10px);
+      margin-left: toRem(4px);
+    }
+
     .property {
       color: var(--color-12);
       font-size: toRem(14px);
@@ -69,8 +75,22 @@
       margin: 0;
     }
 
-    .user-informations__data-row {
-      min-height: initial;
+    .user-informations {
+      &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: toRem(16px);
+
+        .svg-trash {
+          width: toRem(26px);
+          height: toRem(26px);
+        }
+      }
+
+      &__data-row {
+        min-height: initial;
+      }
     }
   }
 

@@ -132,6 +132,11 @@ svg {
   pointer-events: none;
 }
 
+svg {
+  transition: var(--global-transition-time-and-function);
+  transition-property: color, fill;
+}
+
 article {
   width: 100%;
 }

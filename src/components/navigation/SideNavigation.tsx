@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { openCookieSettings } from "@/utils/cookie-consent-util";
 import Button from "@/components/Button";
+import CookieSvg from "@/components/svgs/CookieSvg";
 
 type SideNaviogationProps = {
   ref?: React.Ref<HTMLElement>;
@@ -51,9 +52,14 @@ export default function SideNavigation({ ref, isOpen, isMobile }: SideNaviogatio
 
         <hr className="divider" />
         <div className="side-navigation__footer">
-          <button className="cookie-consent-settings-button" onClick={openCookieSettings} type="button">
-            Süti beállítások
-          </button>
+          <Button
+            variant={"subtle"}
+            className="cookie-consent-settings-button"
+            onClick={openCookieSettings}
+            type="button">
+            <CookieSvg />
+            {translate("COOKIE_CONSENT.ACTIONS.OPEN_SETTINGS")}
+          </Button>
           {/* TODO */}
           <span>&copy; {currentYear} Placeholder</span>
         </div>

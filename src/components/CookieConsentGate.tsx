@@ -14,7 +14,6 @@ import Button from "@/components/Button";
 
 export default function CookieConsentGate() {
   const translate = useTranslations("APP");
-
   const consentStatus = useSyncExternalStore(
     subscribeCookieConsent,
     getCookieConsentSnapshot,
@@ -60,7 +59,11 @@ export default function CookieConsentGate() {
         <div role="dialog" className="cookie-consent">
           <div className="cookie-consent__wrapper">
             <div className="cookie-consent__content">
-              <p className="cookie-consent__sheet">{translate("COOKIE_CONSENT.CONTENT.ONE")}</p>
+              <p className="cookie-consent__sheet">
+                {translate.rich("COOKIE_CONSENT.CONTENT.ONE", {
+                  strong: (chunk) => <strong>{chunk}</strong>,
+                })}
+              </p>
               <div className="cookie-consent__actions">
                 <Button onClick={acceptCookies}>{translate("COOKIE_CONSENT.ACTIONS.ONLY_ACCEPT")}</Button>
                 {/* <Button variant={"secondary"} onClick={rejectCookies}>

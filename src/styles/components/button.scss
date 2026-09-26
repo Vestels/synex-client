@@ -38,17 +38,15 @@
     width: auto;
   }
 
-  &:not(.button--disabled) {
-    @media (hover: hover) {
-      &:hover {
-        color: var(--pure-white);
-        background-color: var(--button-primary-hover);
-      }
+  @media (hover: hover) {
+    &:hover {
+      color: var(--pure-white);
+      background-color: var(--button-primary-hover);
     }
+  }
 
-    &:active {
-      background-color: var(--color-15);
-    }
+  &:active {
+    background-color: var(--color-15);
   }
 
   &:focus-visible {
@@ -60,17 +58,15 @@
     background-color: var(--button-secondary-background);
     border-color: var(--color-00);
 
-    &:not(.button--disabled) {
-      @media (hover: hover) {
-        &:hover {
-          color: var(--color-00);
-          background-color: var(--button-secondary-hover);
-        }
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-00);
+        background-color: var(--button-secondary-hover);
       }
+    }
 
-      &:active {
-        background-color: var(--button-secondary-active);
-      }
+    &:active {
+      background-color: var(--button-secondary-active);
     }
   }
 
@@ -78,17 +74,15 @@
     color: var(--color-00);
     background-color: transparent;
 
-    &:not(.button--disabled) {
-      @media (hover: hover) {
-        &:hover {
-          color: var(--color-00);
-          background-color: var(--button-tertiary-hover);
-        }
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-00);
+        background-color: var(--button-tertiary-hover);
       }
+    }
 
-      &:active {
-        background-color: var(--button-tertiary-active);
-      }
+    &:active {
+      background-color: var(--button-tertiary-active);
     }
 
     &.active {
@@ -97,6 +91,35 @@
       padding-right: toRem(56px);
       border-radius: toRem(32px) 0 0 toRem(32px);
     }
+  }
+
+  &--subtle {
+    font-size: toRem(14px);
+    color: var(--color-18);
+    background-color: transparent;
+    border: none;
+    padding: toRem(4px) toRem(8px);
+    transition: var(--global-transition-time-and-function);
+    transition-property: background-color;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-15);
+        background-color: var(--white-02);
+      }
+    }
+
+    &:active {
+      color: var(--color-15);
+      background-color: var(--white-02);
+    }
+  }
+
+  &--icon-only {
+    width: auto;
+    padding: toRem(4px);
+    border-radius: 50%;
   }
 
   &--user-action {

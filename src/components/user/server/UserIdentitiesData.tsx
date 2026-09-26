@@ -1,6 +1,8 @@
 import React from "react";
 import { getTranslations } from "next-intl/server";
 import { getCurrentUserIdentitiesAction } from "@/actions/user.actions";
+import TrashSvg from "@/components/svgs/TrashSvg";
+import Button from "@/components/Button";
 
 export default async function UserIdentitiesData() {
   const [translate, userIdentities] = await Promise.all([getTranslations("APP"), getCurrentUserIdentitiesAction()]);
@@ -9,10 +11,15 @@ export default async function UserIdentitiesData() {
     <>
       <div className="user-informations user-informations--identity">
         {userIdentities && userIdentities.length > 0 && (
-          <React.Fragment>
+          <>
             {userIdentities.map((identity) => (
               <React.Fragment key={identity.provider}>
-                <p>{translate(`ENUMS.IDENTITY_PROVIDER.${identity.provider}`)}</p>
+                <div className="user-informations__header">
+                  <p>{translate(`ENUMS.IDENTITY_PROVIDER.${identity.provider}`)}</p>
+                  <Button variant={"subtle"} iconOnly={true}>
+                    <TrashSvg />
+                  </Button>
+                </div>
 
                 <hr className="divider" />
 
@@ -35,7 +42,7 @@ export default async function UserIdentitiesData() {
                 </div>
               </React.Fragment>
             ))}
-          </React.Fragment>
+          </>
         )}
       </div>
     </>

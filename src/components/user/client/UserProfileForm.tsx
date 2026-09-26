@@ -58,7 +58,7 @@ export default function UserProfileForm({ initialPreferences }: { initialPrefere
       <div className="user-informations__data-row">
         <label htmlFor="birthDate" className="property property--required">
           {translate("PROFILE.PERSONAL.BIRTH_DATE")}
-          <span className="input-requirement">{`(${translate("REQUIREMENTS.REQUIRED")})`}</span>
+          <sup className="input-requirement">{`(${translate("REQUIREMENTS.REQUIRED")})`}</sup>
         </label>
 
         <input
@@ -74,7 +74,7 @@ export default function UserProfileForm({ initialPreferences }: { initialPrefere
       <div className="user-informations__data-row">
         <label htmlFor="gender" className="property property--required">
           {translate("PROFILE.PERSONAL.GENDER.LABEL")}
-          <span className="input-requirement">{`(${translate("REQUIREMENTS.REQUIRED")})`}</span>
+          <sup className="input-requirement">{`(${translate("REQUIREMENTS.REQUIRED")})`}</sup>
         </label>
 
         <select

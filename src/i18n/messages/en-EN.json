@@ -99,9 +99,10 @@
     },
     "COOKIE_CONSENT": {
       "CONTENT": {
-        "ONE": "A weboldal működéséhez és a biztonságos bejelentkezéshez szükséges cookie-kat használunk. Jelenleg nincs analitika vagy marketing célú adatgyűjtés, és ilyen célból nem osztunk meg adatokat harmadik felekkel."
+        "ONE": "A weboldal működéséhez és a biztonságos bejelentkezéshez szükséges cookie-kat használunk. Jelenleg <strong>nincs analitika vagy marketing célú adatgyűjtés</strong>, és ilyen célból nem osztunk meg adatokat harmadik felekkel."
       },
       "ACTIONS": {
+        "OPEN_SETTINGS": "Süti beállítások",
         "ACCEPTS": "Elfogadás",
         "DECLINE": "Elutasítás",
         "ONLY_ACCEPT": "Értem"

@@ -6,7 +6,7 @@
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "Vestels/app-client-nextjs",
+      "repo": "Vestels/synex-client",
       "disableThanks": true
     }
   ],

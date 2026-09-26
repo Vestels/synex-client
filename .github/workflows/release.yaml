@@ -74,7 +74,7 @@ jobs:
       - name: Push commit and tag
         if: steps.changesets.outputs.has_changesets == 'true'
         run: |
-          git push origin develop
+          git push origin main
           git push origin --tags
 
       - name: Create GitHub Release

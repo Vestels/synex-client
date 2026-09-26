@@ -11,7 +11,7 @@ export default async function UserProfileClient() {
 
   return (
     <>
-      <h1>{translate("TITLE")}</h1>
+      <h1 className="section-title">{translate("TITLE")}</h1>
       <hr className="divider" />
 
       <div className="user-data-table">

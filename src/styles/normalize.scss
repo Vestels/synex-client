@@ -90,14 +90,13 @@ body {
   font-family: "-apple-system, BlinkMacSystemFont", sans-serif;
   font-size: 100%; // 1rem (16px)
   line-height: 130%;
-  font-weight: 400;
   letter-spacing: toRem(0.64px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   box-sizing: border-box;
   background-color: var(--main-background-color);
-  // color: var(--text-color-primary);
+  color: var(--text-color-primary);
 }
 
 // html:has(.side-navigation--open),

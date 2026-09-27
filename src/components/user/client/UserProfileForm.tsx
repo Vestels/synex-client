@@ -82,7 +82,7 @@ export default function UserProfileForm({ initialPreferences }: { initialPrefere
           className="value"
           value={formData.gender ?? ""}
           onChange={(event) => handleUpdateField(setFormData, "gender", event.target.value as Gender)}>
-          <option className="placeholder" value="" disabled>
+          <option value="" disabled>
             {translate("PROFILE.PERSONAL.GENDER.PLACEHOLDER")}
           </option>
 
@@ -109,20 +109,6 @@ export default function UserProfileForm({ initialPreferences }: { initialPrefere
       </div>
 
       <div className="user-informations__data-row">
-        <label htmlFor="firstName" className="property">
-          {translate("PROFILE.PERSONAL.FIRSTNAME")}
-        </label>
-
-        <input
-          id="firstName"
-          type="text"
-          className="value"
-          value={formData.firstName ?? ""}
-          onChange={(event) => handleUpdateField(setFormData, "firstName", event.target.value)}
-        />
-      </div>
-
-      <div className="user-informations__data-row">
         <label htmlFor="lastName" className="property">
           {translate("PROFILE.PERSONAL.LASTNAME")}
         </label>
@@ -133,6 +119,20 @@ export default function UserProfileForm({ initialPreferences }: { initialPrefere
           className="value"
           value={formData.lastName ?? ""}
           onChange={(event) => handleUpdateField(setFormData, "lastName", event.target.value)}
+        />
+      </div>
+
+      <div className="user-informations__data-row">
+        <label htmlFor="firstName" className="property">
+          {translate("PROFILE.PERSONAL.FIRSTNAME")}
+        </label>
+
+        <input
+          id="firstName"
+          type="text"
+          className="value"
+          value={formData.firstName ?? ""}
+          onChange={(event) => handleUpdateField(setFormData, "firstName", event.target.value)}
         />
       </div>
     </div>

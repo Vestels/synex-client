@@ -5,8 +5,10 @@ export default async function Home() {
 
   return (
     <>
-      <h1>{translate("MAIN_PAGE.TITLE")}</h1>
-      <hr className="divider" />
+      <section className="overview-page">
+        <h1>{translate("MAIN_PAGE.TITLE")}</h1>
+        <hr className="divider" />
+      </section>
     </>
   );
 }

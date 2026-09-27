@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { formatDate } from "@/utils/format-date.util";
 import { getCurrentUserAction } from "@/actions/user.actions";
-import UserInfoData from "@/components/user/server/UserInfoData";
+// import UserInfoData from "@/components/user/server/UserInfoData";
 import UserActionButton from "@/components/user/client/UserActionButton";
 
 export default async function UserData() {
@@ -10,7 +10,7 @@ export default async function UserData() {
   return (
     <>
       <div className="user-informations">
-        <UserInfoData />
+        {/* <UserInfoData /> */}
 
         {user && (
           <>

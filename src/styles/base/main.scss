@@ -43,7 +43,7 @@
     display: grid;
     align-items: start;
     width: min(100%, var(--app-content-max-width));
-    min-height: toRem(300px);
+    min-height: 100%;
     border-radius: toRem(8px);
     padding: toRem(16px);
     box-shadow: var(--shadow-02);
@@ -56,10 +56,6 @@
 
     @include media-breakpoint-up(md) {
       padding-inline: toRem(32px);
-    }
-
-    &:has(.spinner) {
-      min-height: toRem(300px);
     }
 
     .unsaved-changes {
@@ -137,6 +133,7 @@
 }
 
 .divider {
+  width: 100%;
   height: toRem(1px);
   border-radius: toRem(1px);
   border: none;

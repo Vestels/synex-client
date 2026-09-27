@@ -122,6 +122,12 @@
     border-radius: 50%;
   }
 
+  &--disabled {
+    pointer-events: none;
+    user-select: none;
+    touch-action: none;
+  }
+
   &--user-action {
     .spinner {
       max-width: toRem(18px);

@@ -28,7 +28,18 @@
     &.button {
       width: toRem(48px);
       height: toRem(48px);
-      padding: toRem(8px);
+      padding: toRem(4px);
+      background-color: transparent;
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: transparent;
+        }
+      }
+
+      &:active {
+        background-color: transparent;
+      }
     }
 
     .menu-wrapper {
@@ -37,9 +48,9 @@
 
       .line {
         height: toRem(3px);
-        width: toRem(26px);
+        width: toRem(32px);
         border-radius: toRem(2px);
-        background-color: var(--pure-white);
+        background-color: var(--color-00);
         transition: var(--global-transition-time-and-function);
         transition-property: transform;
       }

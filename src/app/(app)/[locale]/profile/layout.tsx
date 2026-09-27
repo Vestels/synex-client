@@ -7,8 +7,10 @@ export default async function ProfileLayout({
 }>) {
   return (
     <>
-      {children}
-      <UnsavedChangesPanelWrapper />
+      <section className="profile-page">
+        {children}
+        <UnsavedChangesPanelWrapper />
+      </section>
     </>
   );
 }

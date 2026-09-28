@@ -23,7 +23,7 @@ import {
 import { UserPreferencesUpdate, UserProfileUpdate } from "@/types/user.type";
 import { cookies } from "next/headers";
 
-export async function getCurrentUserAction(): Promise<User> {
+export async function getCurrentUserAction(): Promise<User | null> {
   return await getCurrentUser();
 }
 

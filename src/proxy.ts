@@ -5,6 +5,7 @@ import { AUTH_ROUTES } from "@/constants/routes";
 import createMiddleware from "next-intl/middleware";
 import { getCurrentUserAction, getCurrentUserAppBehaviourPreferencesAction } from "./actions/user.actions";
 import { UserAppBehaviourPreferences } from "./interfaces/user.interface";
+import { redirect } from "next/navigation";
 
 const handleI18nRouting = createMiddleware(routing);
 
@@ -30,6 +31,10 @@ export async function proxy(request: NextRequest) {
   }
 
   const currentUser = await getCurrentUserAction();
+
+  if (!currentUser) {
+    return NextResponse.redirect(new URL(`/${AUTH_ROUTES.LOGOUT}`, request.url));
+  }
 
   const preferencesCookie = request.cookies.get("app-preferences")?.value;
   let appPreferences: UserAppBehaviourPreferences | null = null;

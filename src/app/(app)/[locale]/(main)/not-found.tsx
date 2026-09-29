@@ -1,6 +1,6 @@
 "use client";
 
-import { APP_ROUTES } from "@/constants/routes";
+import { APP_ROUTES } from "@/constants/constants";
 import { useTranslations } from "next-intl";
 import Button from "@/components/Button";
 import Image from "next/image";

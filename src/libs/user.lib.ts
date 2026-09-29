@@ -6,7 +6,7 @@ import {
   UserProfile,
 } from "@/interfaces/user.interface";
 import { apiClient, ApiError } from "@/libs/api-client.lib";
-import { API_ROUTES } from "@/constants/routes";
+import { API_ROUTES } from "@/constants/constants";
 import { CurrentUser, UserPreferencesUpdate, UserProfileUpdate } from "@/types/user.type";
 import { auth0 } from "@/libs/auth0.lib";
 

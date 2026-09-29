@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth0 } from "@/libs/auth0.lib";
 import { routing } from "@/i18n/routing";
-import { AUTH_ROUTES } from "@/constants/routes";
+import { AUTH } from "@/constants/constants";
 import createMiddleware from "next-intl/middleware";
 import { getCurrentUserAction, getCurrentUserAppBehaviourPreferencesAction } from "./actions/user.actions";
 import { UserAppBehaviourPreferences } from "./interfaces/user.interface";
@@ -12,8 +12,8 @@ export async function proxy(request: NextRequest) {
   const url = new URL(request.url);
   const response = await auth0.middleware(request);
 
-  if (url.pathname.startsWith(`/${AUTH_ROUTES.BASE}`)) {
-    if (url.pathname === `/${AUTH_ROUTES.BASE}/${AUTH_ROUTES.LOGOUT}`) {
+  if (url.pathname.startsWith(`/${AUTH.BASE}`)) {
+    if (url.pathname === `/${AUTH.BASE}/${AUTH.LOGOUT}`) {
       response.cookies.delete("app-preferences");
     }
 
@@ -23,12 +23,12 @@ export async function proxy(request: NextRequest) {
   const session = await auth0.getSession(request);
 
   if (!session) {
-    return NextResponse.redirect(new URL(`/${AUTH_ROUTES.BASE}/${AUTH_ROUTES.LOGIN}`, request.url));
+    return NextResponse.redirect(new URL(`/${AUTH.BASE}/${AUTH.LOGIN}`, request.url));
   }
 
   const currentUser = await getCurrentUserAction();
   if (!currentUser) {
-    return NextResponse.redirect(new URL(`/${AUTH_ROUTES.BASE}/${AUTH_ROUTES.LOGOUT}`, request.url));
+    return NextResponse.redirect(new URL(`/${AUTH.BASE}/${AUTH.LOGOUT}`, request.url));
   }
 
   const preferencesCookie = request.cookies.get("app-preferences")?.value;

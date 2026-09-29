@@ -1,9 +1,8 @@
-import { APP_ROUTES } from "@/constants/routes";
+import { APP_ROUTES } from "@/constants/constants";
 import { Auth0Client } from "@auth0/nextjs-auth0/server";
 import { NextResponse } from "next/server";
 
 export const auth0 = new Auth0Client({
-  enableConnectAccountEndpoint: true,
   authorizationParameters: {
     audience: process.env.AUTH0_AUDIENCE,
     scope: "openid profile email offline_access",
@@ -14,12 +13,10 @@ export const auth0 = new Auth0Client({
       throw error;
     }
 
-    if (context.connectedAccount) {
-      // connected account DB sync
+    if (context) {
     }
 
     if (session) {
-      // console.log(session.user);
     }
 
     return NextResponse.redirect(

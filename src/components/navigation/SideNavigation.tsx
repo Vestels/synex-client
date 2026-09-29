@@ -1,6 +1,6 @@
 "use client";
 
-import { APP_ROUTES, AUTH_ROUTES } from "@/constants/routes";
+import { APP_ROUTES, AUTH } from "@/constants/constants";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { openCookieSettings } from "@/utils/cookie-consent-util";
@@ -45,7 +45,7 @@ export default function SideNavigation({ ref, isOpen, isMobile }: SideNaviogatio
             </li>
           </ul>
           <hr className="divider" />
-          <a href={`/${AUTH_ROUTES.BASE}/${AUTH_ROUTES.LOGOUT}`} className="button button--primary button--logout">
+          <a href={`/${AUTH.BASE}/${AUTH.LOGOUT}`} className="button button--primary button--logout">
             {translate("ACTIONS.LOGOUT")}
           </a>
         </nav>

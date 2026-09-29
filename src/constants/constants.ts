@@ -1,4 +1,4 @@
-export const AUTH_ROUTES = {
+export const AUTH = {
   BASE: "auth",
   LOGIN: "login",
   LOGOUT: "logout",
@@ -23,6 +23,7 @@ export const API_ROUTES = {
     PREFERENCES: "preferences",
     APP_PREFERENCES: "app",
     IDENTITIES: "identities",
+    LINK_IDENTTIY: "link",
     CANCEL_DELETE: "deletion/cancel",
   },
 } as const;

@@ -41,13 +41,13 @@
       gap: toRem(4px);
       min-height: toRem(24px);
 
+      &--one-liner {
+        grid-template-columns: 1fr max-content;
+      }
+
       @include media-breakpoint-up(md) {
         gap: toRem(16px);
         grid-template-columns: 0.4fr 0.6fr;
-      }
-
-      &--one-liner {
-        grid-template-columns: 1fr max-content;
       }
 
       .user-header__wrapper {

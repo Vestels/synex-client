@@ -60,7 +60,15 @@
       "IDENTITIES": {
         "TITLE": "Bejelentkezési módok",
         "CREATED_AT": "Létrehozva:",
-        "LAST_USED_AT": "Utolsó használat:"
+        "LAST_USED_AT": "Utolsó használat:",
+        "PASSWORD": {
+          "CONNECT": "Jelszó hozzáadása",
+          "DISCONNECT": "Jelszó eltávolítása"
+        },
+        "GOOGLE": {
+          "CONNECT": "Google hozzáadása",
+          "DISCONNECT": "Google eltávolítása"
+        }
       },
       "UNSAVED_CHANGES_PANEL": {
         "LABEL": "Nem mentett módosítások"

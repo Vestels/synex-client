@@ -5,35 +5,30 @@ import { AUTH_ROUTES } from "@/constants/routes";
 import createMiddleware from "next-intl/middleware";
 import { getCurrentUserAction, getCurrentUserAppBehaviourPreferencesAction } from "./actions/user.actions";
 import { UserAppBehaviourPreferences } from "./interfaces/user.interface";
-import { redirect } from "next/navigation";
 
 const handleI18nRouting = createMiddleware(routing);
 
 export async function proxy(request: NextRequest) {
   const url = new URL(request.url);
+  const response = await auth0.middleware(request);
 
-  if (url.pathname === `/${AUTH_ROUTES.LOGOUT}`) {
-    const response = await auth0.middleware(request);
-
-    response.cookies.delete("app-preferences");
+  if (url.pathname.startsWith(`/${AUTH_ROUTES.BASE}`)) {
+    if (url.pathname === `/${AUTH_ROUTES.BASE}/${AUTH_ROUTES.LOGOUT}`) {
+      response.cookies.delete("app-preferences");
+    }
 
     return response;
   }
 
-  if (url.pathname.startsWith(`/${AUTH_ROUTES.BASE}`)) {
-    return auth0.middleware(request);
-  }
-
-  const session = await auth0.getSession();
+  const session = await auth0.getSession(request);
 
   if (!session) {
-    return NextResponse.redirect(new URL(`/${AUTH_ROUTES.LOGIN}`, request.url));
+    return NextResponse.redirect(new URL(`/${AUTH_ROUTES.BASE}/${AUTH_ROUTES.LOGIN}`, request.url));
   }
 
   const currentUser = await getCurrentUserAction();
-
   if (!currentUser) {
-    return NextResponse.redirect(new URL(`/${AUTH_ROUTES.LOGOUT}`, request.url));
+    return NextResponse.redirect(new URL(`/${AUTH_ROUTES.BASE}/${AUTH_ROUTES.LOGOUT}`, request.url));
   }
 
   const preferencesCookie = request.cookies.get("app-preferences")?.value;
@@ -66,21 +61,19 @@ export async function proxy(request: NextRequest) {
 
   const i18nResponse = handleI18nRouting(request);
 
-  if (currentUser && appPreferences) {
-    i18nResponse.cookies.set(
-      "app-preferences",
-      JSON.stringify({
-        language: appPreferences.language.toLocaleLowerCase(),
-        theme: appPreferences.theme.toLocaleLowerCase(),
-      }),
-      {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-      },
-    );
-  }
+  i18nResponse.cookies.set(
+    "app-preferences",
+    JSON.stringify({
+      language: appPreferences.language.toLocaleLowerCase(),
+      theme: appPreferences.theme.toLocaleLowerCase(),
+    }),
+    {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    },
+  );
 
   return i18nResponse;
 }

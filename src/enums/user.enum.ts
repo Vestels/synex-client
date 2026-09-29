@@ -27,4 +27,5 @@ export enum Theme {
 
 export enum IdentityProvider {
   PASSWORD = "PASSWORD",
+  GOOGLE = "GOOGLE"
 }

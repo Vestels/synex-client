@@ -45,7 +45,7 @@ export default function SideNavigation({ ref, isOpen, isMobile }: SideNaviogatio
             </li>
           </ul>
           <hr className="divider" />
-          <a href={`/${AUTH_ROUTES.LOGOUT}`} className="button button--primary button--logout">
+          <a href={`/${AUTH_ROUTES.BASE}/${AUTH_ROUTES.LOGOUT}`} className="button button--primary button--logout">
             {translate("ACTIONS.LOGOUT")}
           </a>
         </nav>

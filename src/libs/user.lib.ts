@@ -1,28 +1,37 @@
 import {
   User,
   UserAppBehaviourPreferences,
-  UserAuth0Info,
   UserIdentity,
   UserPreference,
   UserProfile,
 } from "@/interfaces/user.interface";
 import { apiClient, ApiError } from "@/libs/api-client.lib";
 import { API_ROUTES } from "@/constants/routes";
-import { UserPreferencesUpdate, UserProfileUpdate } from "@/types/user.type";
+import { CurrentUser, UserPreferencesUpdate, UserProfileUpdate } from "@/types/user.type";
+import { auth0 } from "@/libs/auth0.lib";
 
-export async function getCurrentUser(): Promise<User | null> {
+export async function getCurrentUser(): Promise<CurrentUser | null> {
+  const session = await auth0.getSession();
+
+  if (!session) {
+    return null;
+  }
+
   try {
-    return await apiClient<User>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.DATA}`);
+    const currentUser = await apiClient<User>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.DATA}`);
+
+    return {
+      ...currentUser,
+      picture: session.user.picture,
+      email_verified: session.user.email_verified,
+    };
   } catch (error) {
-    if (error instanceof ApiError && [401, 410].includes(error.status)) {
+    //  && [401, 403, 409, 410].includes(error.status)
+    if (error instanceof ApiError) {
       return null;
     }
     throw error;
   }
-}
-
-export async function getCurrentUserInfoData(): Promise<UserAuth0Info> {
-  return await apiClient<UserAuth0Info>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.DATA}/${API_ROUTES.USERS.INFO}`);
 }
 
 export async function getCurrentUserProfile(): Promise<UserProfile> {

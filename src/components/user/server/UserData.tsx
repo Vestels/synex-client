@@ -1,8 +1,10 @@
 import { getTranslations } from "next-intl/server";
 import { formatDate } from "@/utils/format-date.util";
 import { getCurrentUserAction } from "@/actions/user.actions";
-// import UserInfoData from "@/components/user/server/UserInfoData";
 import UserActionButton from "@/components/user/client/UserActionButton";
+import CheckMarkSvg from "@/components/svgs/CheckMarkSvg";
+import XMarkSvg from "@/components/svgs/XMarkSvg";
+import NoDataSvg from "@/components/svgs/NoDataSvg";
 
 export default async function UserData() {
   const [translate, user] = await Promise.all([getTranslations("APP"), getCurrentUserAction()]);
@@ -10,10 +12,19 @@ export default async function UserData() {
   return (
     <>
       <div className="user-informations">
-        {/* <UserInfoData /> */}
-
         {user && (
           <>
+            <div className="user-informations__data-row">
+              <strong className="property">{translate("PROFILE.ME.EMAIL_VERIFIED")}</strong>
+              {user.email_verified ? (
+                <p className={`value status ${user.email_verified ? "status--verified" : "status--not-verified"}`}>
+                  {user.email_verified ? <CheckMarkSvg /> : <XMarkSvg />}
+                </p>
+              ) : (
+                <NoDataSvg />
+              )}
+            </div>
+
             <div className="user-informations__data-row">
               <strong className="property">{translate("PROFILE.ME.EMAIL")}</strong>
               {user.email ? <p className="value">{user.email}</p> : "-"}

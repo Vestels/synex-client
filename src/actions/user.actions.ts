@@ -1,9 +1,7 @@
 "use server";
 
 import {
-  User,
   UserAppBehaviourPreferences,
-  UserAuth0Info,
   UserIdentity,
   UserPreference,
   UserProfile,
@@ -13,22 +11,17 @@ import {
   getCurrentUser,
   getCurrentUserAppBehaviourPreferences,
   getCurrentUserIdentities,
-  getCurrentUserInfoData,
   getCurrentUserPreferences,
   getCurrentUserProfile,
   requestClearDeleteForCurrentUser,
   updateCurrentUserPreferences,
   updateCurrentUserProfile,
 } from "@/libs/user.lib";
-import { UserPreferencesUpdate, UserProfileUpdate } from "@/types/user.type";
+import { CurrentUser, UserPreferencesUpdate, UserProfileUpdate } from "@/types/user.type";
 import { cookies } from "next/headers";
 
-export async function getCurrentUserAction(): Promise<User | null> {
+export async function getCurrentUserAction(): Promise<CurrentUser | null> {
   return await getCurrentUser();
-}
-
-export async function getCurrentUserInfoDataAction(): Promise<UserAuth0Info> {
-  return await getCurrentUserInfoData();
 }
 
 export async function getCurrentUserProfileAction(): Promise<UserProfile> {

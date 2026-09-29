@@ -1,13 +1,5 @@
 import { Gender, Language, Theme, UnitSystem, UserStatus } from "@/enums/user.enum";
 
-export interface CurrentUser {
-  user: User;
-  auth0Info: UserAuth0Info;
-  profile: UserProfile;
-  preferences: UserPreference;
-  identity: UserIdentity;
-}
-
 export interface User {
   email: string;
   userStatus: UserStatus;
@@ -21,7 +13,7 @@ export interface User {
 
 export interface UserAuth0Info {
   picture: string;
-  emailVerified: boolean;
+  email_verified: boolean;
 }
 
 export interface UserProfile {

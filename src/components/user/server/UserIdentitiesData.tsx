@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
+ 
 import React from "react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { getCurrentUserIdentitiesAction } from "@/actions/user.actions";

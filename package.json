@@ -12,6 +12,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
     "commitlint": "commitlint --edit",

@@ -6,7 +6,6 @@ import CheckMarkSvg from "@/components/svgs/CheckMarkSvg";
 import XMarkSvg from "@/components/svgs/XMarkSvg";
 import NoDataSvg from "@/components/svgs/NoDataSvg";
 import Image from "next/image";
-import { UserStatus } from "@/enums/user.enum";
 
 export default async function UserData() {
   const [translate, user] = await Promise.all([getTranslations("APP"), getCurrentUserAction()]);

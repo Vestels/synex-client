@@ -1,6 +1,6 @@
 {
   "APP": {
-    "APP_NAME": "App Logo",
+    "APP_NAME": "Synex",
     "MAIN_PAGE": {
       "TITLE": "Áttekintő"
     },
@@ -11,7 +11,7 @@
     "ACTIONS": {
       "LOGOUT": "Kijelentkezés",
       "PROFILE": {
-        "RESTORE": "Törlés visszavonása",
+        "RESTORE": "Fiók helyreállítása",
         "DELETE": "Fiók törlése",
         "SAVE": "Mentés",
         "CANCEL": "Elvetés"
@@ -22,7 +22,7 @@
       }
     },
     "REQUIREMENTS": {
-      "REQUIRED": "Kötelező",
+      "REQUIRED": "*",
       "OPTIONAL": "Opcionális"
     },
     "PROFILE": {

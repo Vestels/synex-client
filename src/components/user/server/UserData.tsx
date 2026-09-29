@@ -5,6 +5,8 @@ import UserActionButton from "@/components/user/client/UserActionButton";
 import CheckMarkSvg from "@/components/svgs/CheckMarkSvg";
 import XMarkSvg from "@/components/svgs/XMarkSvg";
 import NoDataSvg from "@/components/svgs/NoDataSvg";
+import Image from "next/image";
+import { UserStatus } from "@/enums/user.enum";
 
 export default async function UserData() {
   const [translate, user] = await Promise.all([getTranslations("APP"), getCurrentUserAction()]);
@@ -14,20 +16,35 @@ export default async function UserData() {
       <div className="user-informations">
         {user && (
           <>
-            <div className="user-informations__data-row">
-              <strong className="property">{translate("PROFILE.ME.EMAIL_VERIFIED")}</strong>
-              {user.email_verified ? (
-                <p className={`value status ${user.email_verified ? "status--verified" : "status--not-verified"}`}>
-                  {user.email_verified ? <CheckMarkSvg /> : <XMarkSvg />}
-                </p>
-              ) : (
-                <NoDataSvg />
-              )}
-            </div>
+            {user.picture && user.picture !== null && (
+              <div className="user-informations__data-row">
+                <div className="user-header__wrapper">
+                  <Image className="pfp" src={user.picture} width={50} height={50} alt="" />
+                  {!user.deletionRequestAt && !user.scheduledDeletionAt ? (
+                    <UserActionButton onClick="delete">{translate("ACTIONS.PROFILE.DELETE")}</UserActionButton>
+                  ) : (
+                    <UserActionButton onClick="cleardelete">{translate("ACTIONS.PROFILE.RESTORE")}</UserActionButton>
+                  )}
+                </div>
+              </div>
+            )}
 
             <div className="user-informations__data-row">
               <strong className="property">{translate("PROFILE.ME.EMAIL")}</strong>
-              {user.email ? <p className="value">{user.email}</p> : "-"}
+              {user.email ? (
+                <div className="value value--email">
+                  {user.email}
+                  {user.email_verified ? (
+                    <p className={`status ${user.email_verified ? "status--verified" : "status--not-verified"}`}>
+                      {user.email_verified ? <CheckMarkSvg /> : <XMarkSvg />}
+                    </p>
+                  ) : (
+                    <NoDataSvg />
+                  )}
+                </div>
+              ) : (
+                "-"
+              )}
             </div>
 
             <div className="user-informations__data-row">
@@ -52,26 +69,31 @@ export default async function UserData() {
 
             <div className="user-informations__data-row">
               <strong className="property">{translate("PROFILE.ME.ACCOUNT_STATUS")}</strong>
-              {user.userStatus ? <p className="value">{translate(`ENUMS.USER_STATUS.${user.userStatus}`)}</p> : "-"}
+              {user.userStatus ? (
+                <p
+                  className={`value value--user-status status status--${user.userStatus.toLocaleLowerCase().replaceAll("_", "-")}`}>
+                  {translate(`ENUMS.USER_STATUS.${user.userStatus}`)}
+                </p>
+              ) : (
+                "-"
+              )}
             </div>
 
             {user.deletionRequestAt && user.scheduledDeletionAt ? (
               <>
-                <div className="user-informations__data-row">
-                  <strong className="property">{translate("PROFILE.ME.DELETION_REQUESTED_AT")}</strong>
-                  <p className="value">{formatDate(user.deletionRequestAt!, true)}</p>
-                </div>
+                <div className="user-deletion-data">
+                  <div className="user-informations__data-row">
+                    <strong className="property">{translate("PROFILE.ME.DELETION_REQUESTED_AT")}</strong>
+                    <p className="value">{formatDate(user.deletionRequestAt!, true)}</p>
+                  </div>
 
-                <div className="user-informations__data-row">
-                  <strong className="property">{translate("PROFILE.ME.DELETION_SCHEDULED_AT")}</strong>
-                  <p className="value">{formatDate(user.scheduledDeletionAt!, true)}</p>
+                  <div className="user-informations__data-row">
+                    <strong className="property">{translate("PROFILE.ME.DELETION_SCHEDULED_AT")}</strong>
+                    <p className="value">{formatDate(user.scheduledDeletionAt!, true)}</p>
+                  </div>
                 </div>
-
-                <UserActionButton onClick="cleardelete">{translate("ACTIONS.PROFILE.RESTORE")}</UserActionButton>
               </>
-            ) : (
-              <UserActionButton onClick="delete">{translate("ACTIONS.PROFILE.DELETE")}</UserActionButton>
-            )}
+            ) : null}
           </>
         )}
       </div>

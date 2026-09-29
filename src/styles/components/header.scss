@@ -15,11 +15,21 @@
   border-style: solid;
   z-index: 3;
 
+  &__brand {
+  }
+
+  &__app-name {
+    @include media-breakpoint-down(md) {
+      font-size: toRem(26px);
+      line-height: toRem(32px);
+    }
+  }
+
   &__wrapper {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: toRem(24px);
+    gap: toRem(12px);
     width: min(100%, var(--app-main-max-width));
     padding-inline: toRem(16px);
   }
@@ -44,11 +54,11 @@
 
     .menu-wrapper {
       display: grid;
-      gap: toRem(6px);
+      gap: toRem(4px);
 
       .line {
         height: toRem(3px);
-        width: toRem(32px);
+        width: toRem(30px);
         border-radius: toRem(2px);
         background-color: var(--color-00);
         transition: var(--global-transition-time-and-function);
@@ -71,9 +81,5 @@
         }
       }
     }
-  }
-
-  &__logo {
-    hyphens: auto;
   }
 }

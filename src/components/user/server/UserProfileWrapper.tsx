@@ -11,43 +11,49 @@ export default async function UserProfileClient() {
 
   return (
     <>
-      <h1 className="section-title">{translate("TITLE")}</h1>
-      <hr className="divider" />
-
       <div className="user-data-table">
         <Suspense fallback={<SpinnerSvg />}>
           <UserData />
         </Suspense>
       </div>
 
-      <hr className="divider" />
-      <h2 className="section-title">{translate("PERSONAL.TITLE")}</h2>
-      <hr className="divider" />
+      <div className="user-data-wrapper">
+        <div>
+          <h2 className="section-title">{translate("PERSONAL.TITLE")}</h2>
+          <hr className="divider" />
+        </div>
 
-      <div className="user-data-table">
-        <Suspense fallback={<SpinnerSvg />}>
-          <UserProfileData />
-        </Suspense>
+        <div className="user-data-table">
+          <Suspense fallback={<SpinnerSvg />}>
+            <UserProfileData />
+          </Suspense>
+        </div>
       </div>
 
-      <hr className="divider" />
-      <h2 className="section-title">{translate("PREFERENCES.TITLE")}</h2>
-      <hr className="divider" />
+      <div className="user-data-wrapper">
+        <div>
+          <h2 className="section-title">{translate("PREFERENCES.TITLE")}</h2>
+          <hr className="divider" />
+        </div>
 
-      <div className="user-data-table">
-        <Suspense fallback={<SpinnerSvg />}>
-          <UserPreferencesData />
-        </Suspense>
+        <div className="user-data-table">
+          <Suspense fallback={<SpinnerSvg />}>
+            <UserPreferencesData />
+          </Suspense>
+        </div>
       </div>
 
-      <hr className="divider" />
-      <h2 className="section-title">{translate("IDENTITIES.TITLE")}</h2>
-      <hr className="divider" />
+      <div className="user-data-wrapper">
+        <div>
+          <h2 className="section-title">{translate("IDENTITIES.TITLE")}</h2>
+          <hr className="divider" />
+        </div>
 
-      <div className="user-data-table user-data-table--identities">
-        <Suspense fallback={<SpinnerSvg />}>
-          <UserIdentitiesData />
-        </Suspense>
+        <div className="user-data-table user-data-table--identities">
+          <Suspense fallback={<SpinnerSvg />}>
+            <UserIdentitiesData />
+          </Suspense>
+        </div>
       </div>
     </>
   );

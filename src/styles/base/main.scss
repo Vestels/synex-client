@@ -45,7 +45,7 @@
     width: min(100%, var(--app-content-max-width));
     min-height: 100%;
     border-radius: toRem(8px);
-    padding: toRem(16px);
+    padding: toRem(36px) toRem(16px);
     box-shadow: var(--shadow-02);
     background-color: var(--pure-white);
     border-color: var(--main-border-color);
@@ -123,6 +123,12 @@
   .section-title {
     color: var(--color-00);
     letter-spacing: toRem(1px);
+    border-radius: toRem(12px);
+
+    @include media-breakpoint-down(md) {
+      font-size: toRem(24px);
+      line-height: toRem(32px);
+    }
   }
 
   &:has(.side-navigation--open) {

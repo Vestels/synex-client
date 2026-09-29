@@ -25,8 +25,8 @@ export default function Header({ ref, isMobile, isSideNavigationOpen, onMenuOpen
             </div>
           </Button>
         )}
-        <div className="header__logo">
-          <h1>{translate("APP_NAME")}</h1>
+        <div className="header__brand">
+          <h1 className="header__app-name">{translate("APP_NAME")}</h1>
         </div>
       </div>
     </header>

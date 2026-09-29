@@ -61,7 +61,9 @@ export default function SideNavigation({ ref, isOpen, isMobile }: SideNaviogatio
             {translate("COOKIE_CONSENT.ACTIONS.OPEN_SETTINGS")}
           </Button>
           {/* TODO */}
-          <span>&copy; {currentYear} Placeholder</span>
+          <span>
+            &copy; {currentYear} {translate("APP_NAME")}
+          </span>
         </div>
       </aside>
     </>

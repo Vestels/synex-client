@@ -26,7 +26,9 @@ export default async function UserIdentitiesData() {
                 <div className="user-informations__data-row">
                   <strong className="property">{translate("PROFILE.IDENTITIES.CREATED_AT")}</strong>
                   {identity.createdAt ? (
-                    <p className="value">{new Date(identity.createdAt).toLocaleDateString()}</p>
+                    <p className="value" suppressHydrationWarning>
+                      {new Date(identity.createdAt).toLocaleDateString()}
+                    </p>
                   ) : (
                     "-"
                   )}
@@ -35,7 +37,9 @@ export default async function UserIdentitiesData() {
                 <div className="user-informations__data-row">
                   <strong className="property">{translate("PROFILE.IDENTITIES.LAST_USED_AT")}</strong>
                   {identity.lastUsedAt ? (
-                    <p className="value">{new Date(identity.lastUsedAt).toLocaleDateString()}</p>
+                    <p className="value" suppressHydrationWarning>
+                      {new Date(identity.lastUsedAt).toLocaleDateString()}
+                    </p>
                   ) : (
                     "-"
                   )}

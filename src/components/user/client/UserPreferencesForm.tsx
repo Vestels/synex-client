@@ -61,7 +61,6 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
         </label>
 
         <select
-          disabled
           id="language"
           value={formData.language}
           onChange={(event) => handleUpdateField(setFormData, "language", event.target.value as Language)}>
@@ -79,7 +78,6 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
         </label>
 
         <select
-          disabled
           id="unitSystem"
           value={formData.unitSystem}
           onChange={(event) => handleUpdateField(setFormData, "unitSystem", event.target.value as UnitSystem)}>
@@ -97,7 +95,6 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
         </label>
 
         <select
-          disabled
           id="theme"
           value={formData.theme}
           onChange={(event) => handleUpdateField(setFormData, "theme", event.target.value as Theme)}>
@@ -116,7 +113,6 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
 
         <label className="switch">
           <input
-            disabled
             id="emailNotifications"
             type="checkbox"
             checked={formData.emailNotifications}
@@ -133,7 +129,6 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
 
         <label className="switch">
           <input
-            disabled
             id="pushNotifications"
             type="checkbox"
             checked={formData.pushNotifications}

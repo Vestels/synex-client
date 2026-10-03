@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth0 } from "@/libs/auth0.lib";
 import { routing } from "@/i18n/routing";
-import { AUTH } from "@/constants/constants";
-import createMiddleware from "next-intl/middleware";
+import { APP_ROUTES, AUTH } from "@/constants/constants";
 import { getCurrentUserAction, getCurrentUserAppBehaviourPreferencesAction } from "./actions/user.actions";
 import { UserAppBehaviourPreferences } from "./interfaces/user.interface";
+import createMiddleware from "next-intl/middleware";
 
 const handleI18nRouting = createMiddleware(routing);
 
@@ -15,6 +15,11 @@ export async function proxy(request: NextRequest) {
   if (url.pathname.startsWith(`/${AUTH.BASE}`)) {
     if (url.pathname === `/${AUTH.BASE}/${AUTH.LOGOUT}`) {
       response.cookies.delete("app-preferences");
+
+      // Mock middleware returns simple NextResponse
+      if (response.ok) {
+        return NextResponse.redirect(new URL(`${APP_ROUTES.HOME}`, request.url));
+      }
     }
 
     return response;
@@ -27,6 +32,7 @@ export async function proxy(request: NextRequest) {
   }
 
   const currentUser = await getCurrentUserAction();
+
   if (!currentUser) {
     return NextResponse.redirect(new URL(`/${AUTH.BASE}/${AUTH.LOGOUT}`, request.url));
   }

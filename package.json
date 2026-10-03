@@ -16,7 +16,8 @@
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
     "commitlint": "commitlint --edit",
-    "commit": "commit"
+    "commit": "commit",
+    "mock-server": "nodemon --exec \"tsx\" mock-server/custom-middleware.ts --watch mock-server"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.29.0",
@@ -32,14 +33,21 @@
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
     "@commitlint/prompt-cli": "^21.2.3",
+    "@types/express": "^5.0.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9.39.5",
     "eslint-config-next": "16.3.5",
+    "express": "^5.2.1",
+    "express-delay": "^0.2.0",
+    "glob": "^13.0.6",
     "husky": "^9.1.7",
+    "json-server": "0.17.4",
+    "nodemon": "^3.1.14",
     "sass": "^1.104.1",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

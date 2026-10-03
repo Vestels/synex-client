@@ -1,15 +1,21 @@
 import React from "react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { getCurrentUserIdentitiesAction } from "@/actions/user.actions";
 import TrashSvg from "@/components/svgs/TrashSvg";
 import Button from "@/components/Button";
 
 export default async function UserIdentitiesData() {
-  const [translate, userIdentities] = await Promise.all([getTranslations("APP"), getCurrentUserIdentitiesAction()]);
+  const [locale, translate, userIdentities] = await Promise.all([
+    getLocale(),
+    getTranslations("APP"),
+    getCurrentUserIdentitiesAction(),
+  ]);
 
   return (
     <>
       <div className="user-informations user-informations--identity">
+        {/* TODO */}
+        <a href={`/${locale}/api/auth/link`}>Google fiók csatolása</a>
         {userIdentities && userIdentities.length > 0 && (
           <>
             {userIdentities.map((identity) => (

@@ -98,7 +98,8 @@
         "DARK": "Sötét"
       },
       "IDENTITY_PROVIDER": {
-        "PASSWORD": "Jelszó"
+        "PASSWORD": "Jelszó",
+        "GOOGLE": "Google"
       }
     },
     "STATUS": {

@@ -79,6 +79,11 @@
         font-size: toRem(14px);
         line-height: 140%;
         font-weight: 700;
+
+        &--required {
+          display: flex;
+          align-items: center;
+        }
       }
 
       .value {

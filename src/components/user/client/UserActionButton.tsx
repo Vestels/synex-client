@@ -1,14 +1,17 @@
-"use client";
+'use client';
 
-import { useTransition } from "react";
-import { deleteCurrentUserAction, requestClearDeleteForCurrentUserAction } from "@/actions/user.actions";
-import Button from "@/components/Button";
-import SpinnerSvg from "@/components/svgs/SpinnerSvg";
-import { useRouter } from "next/navigation";
+import { useTransition } from 'react';
+import {
+  deleteCurrentUserAction,
+  requestClearDeleteForCurrentUserAction,
+} from '@/actions/user.actions';
+import Button from '@/components/Button';
+import SpinnerSvg from '@/components/svgs/SpinnerSvg';
+import { useRouter } from 'next/navigation';
 
 interface UserActionButtonProps {
   children: React.ReactNode;
-  onClick: "delete" | "cleardelete";
+  onClick: 'delete' | 'cleardelete';
 }
 
 export default function UserActionButton({ children, onClick }: UserActionButtonProps) {
@@ -18,7 +21,7 @@ export default function UserActionButton({ children, onClick }: UserActionButton
   const handleClick = () => {
     startTransition(async () => {
       try {
-        if ("delete" === onClick) {
+        if ('delete' === onClick) {
           await deleteCurrentUserAction();
         } else {
           await requestClearDeleteForCurrentUserAction();
@@ -32,7 +35,12 @@ export default function UserActionButton({ children, onClick }: UserActionButton
   };
 
   return (
-    <Button className="button--user-action" variant={"subtle"} disabled={isPending} onClick={handleClick}>
+    <Button
+      className="button--user-action"
+      variant={'subtle'}
+      disabled={isPending}
+      onClick={handleClick}
+    >
       {isPending ? <SpinnerSvg /> : children}
     </Button>
   );

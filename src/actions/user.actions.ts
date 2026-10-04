@@ -1,11 +1,11 @@
-"use server";
+'use server';
 
 import {
   UserAppBehaviourPreferences,
   UserIdentity,
   UserPreference,
   UserProfile,
-} from "@/interfaces/user.interface";
+} from '@/interfaces/user.interface';
 import {
   deleteCurrentUser,
   getCurrentUser,
@@ -16,9 +16,9 @@ import {
   requestClearDeleteForCurrentUser,
   updateCurrentUserPreferences,
   updateCurrentUserProfile,
-} from "@/libs/user.lib";
-import { CurrentUser, UserPreferencesUpdate, UserProfileUpdate } from "@/types/user.type";
-import { cookies } from "next/headers";
+} from '@/libs/user.lib';
+import { CurrentUser, UserPreferencesUpdate, UserProfileUpdate } from '@/types/user.type';
+import { cookies } from 'next/headers';
 
 export async function getCurrentUserAction(): Promise<CurrentUser | null> {
   return await getCurrentUser();
@@ -28,7 +28,9 @@ export async function getCurrentUserProfileAction(): Promise<UserProfile> {
   return await getCurrentUserProfile();
 }
 
-export async function updateCurrentUserProfileAction(profileData: UserProfileUpdate): Promise<void> {
+export async function updateCurrentUserProfileAction(
+  profileData: UserProfileUpdate
+): Promise<void> {
   await updateCurrentUserProfile(profileData);
 }
 
@@ -40,16 +42,18 @@ export async function getCurrentUserAppBehaviourPreferencesAction(): Promise<Use
   return await getCurrentUserAppBehaviourPreferences();
 }
 
-export async function updateCurrentUserPreferencesAction(preferenceData: UserPreferencesUpdate): Promise<void> {
+export async function updateCurrentUserPreferencesAction(
+  preferenceData: UserPreferencesUpdate
+): Promise<void> {
   await updateCurrentUserPreferences(preferenceData);
 
   const cookieStore = await cookies();
-  const existingCookie = cookieStore.get("app-preferences")?.value;
+  const existingCookie = cookieStore.get('app-preferences')?.value;
 
   const currentPreferences = existingCookie ? JSON.parse(existingCookie) : {};
 
   cookieStore.set(
-    "app-preferences",
+    'app-preferences',
     JSON.stringify({
       ...currentPreferences,
       ...(preferenceData.language !== undefined && {
@@ -61,10 +65,10 @@ export async function updateCurrentUserPreferencesAction(preferenceData: UserPre
     }),
     {
       httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-    },
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    }
   );
 }
 

@@ -1,16 +1,16 @@
-import { auth0 } from "@/libs/auth0.lib";
+import { auth0 } from '@/libs/auth0.lib';
 
 export class ApiError extends Error {
   constructor(
     message: string,
-    public readonly status: number,
+    public readonly status: number
   ) {
     super(message);
-    this.name = "ApiError";
+    this.name = 'ApiError';
   }
 }
 
-type ApiRequestOptions = Omit<RequestInit, "body"> & {
+type ApiRequestOptions = Omit<RequestInit, 'body'> & {
   body?: unknown;
 };
 
@@ -22,7 +22,7 @@ export async function apiClient<T>(endpoint: string, options?: ApiRequestOptions
   const response = await fetch(url, {
     ...options,
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       ...options?.headers,
       Authorization: `Bearer ${token}`,
     },
@@ -32,13 +32,16 @@ export async function apiClient<T>(endpoint: string, options?: ApiRequestOptions
   if (!response.ok) {
     const body = await response.text();
 
-    console.error("API ERROR:", {
+    console.error('API ERROR:', {
       url,
       status: response.status,
       body,
     });
 
-    throw new ApiError(body || `API request failed with status ${response.status}`, response.status);
+    throw new ApiError(
+      body || `API request failed with status ${response.status}`,
+      response.status
+    );
   }
 
   const body = await response.text();

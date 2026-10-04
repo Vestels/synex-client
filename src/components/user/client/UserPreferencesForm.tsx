@@ -1,17 +1,21 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { UserPreference } from "@/interfaces/user.interface";
-import { Language, Theme, UnitSystem } from "@/enums/user.enum";
-import { useTranslations } from "next-intl";
-import { getChangedFields, handleUpdateField } from "@/utils/form.util";
-import { useUnsavedChangesStore } from "@/stores/unsaved-changes.store";
-import { updateCurrentUserPreferencesAction } from "@/actions/user.actions";
-import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from 'react';
+import { UserPreference } from '@/interfaces/user.interface';
+import { Language, Theme, UnitSystem } from '@/enums/user.enum';
+import { useTranslations } from 'next-intl';
+import { getChangedFields, handleUpdateField } from '@/utils/form.util';
+import { useUnsavedChangesStore } from '@/stores/unsaved-changes.store';
+import { updateCurrentUserPreferencesAction } from '@/actions/user.actions';
+import { useRouter } from 'next/navigation';
 
-export default function UserPreferencesForm({ initialPreferences }: { initialPreferences: UserPreference }) {
+export default function UserPreferencesForm({
+  initialPreferences,
+}: {
+  initialPreferences: UserPreference;
+}) {
   const router = useRouter();
-  const translate = useTranslations("APP");
+  const translate = useTranslations('APP');
   const [formData, setFormData] = useState<UserPreference>(initialPreferences);
   const formDataRef = useRef(formData);
 
@@ -26,15 +30,15 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
     const changed = JSON.stringify(formData) !== JSON.stringify(initialPreferences);
 
     if (changed) {
-      markChanged("preferences");
+      markChanged('preferences');
     } else {
-      markSaved("preferences");
+      markSaved('preferences');
     }
   }, [formData, initialPreferences, markChanged, markSaved]);
 
   useEffect(() => {
     registerForm(
-      "preferences",
+      'preferences',
 
       async () => {
         const changedFields = getChangedFields(initialPreferences, formDataRef.current);
@@ -45,11 +49,11 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
       () => {
         setFormData(initialPreferences);
         formDataRef.current = initialPreferences;
-      },
+      }
     );
 
     return () => {
-      unregisterForm("preferences");
+      unregisterForm('preferences');
     };
   }, [registerForm, unregisterForm, initialPreferences, router]);
 
@@ -57,13 +61,16 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
     <div className="user-informations">
       <div className="user-informations__data-row">
         <label htmlFor="language" className="property">
-          {translate("PROFILE.PREFERENCES.LANGUAGE")}
+          {translate('PROFILE.PREFERENCES.LANGUAGE')}
         </label>
 
         <select
           id="language"
           value={formData.language}
-          onChange={(event) => handleUpdateField(setFormData, "language", event.target.value as Language)}>
+          onChange={(event) =>
+            handleUpdateField(setFormData, 'language', event.target.value as Language)
+          }
+        >
           {Object.values(Language).map((language) => (
             <option key={language} value={language}>
               {translate(`ENUMS.LANGUAGE.${language}`)}
@@ -74,13 +81,16 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
 
       <div className="user-informations__data-row">
         <label htmlFor="unitSystem" className="property">
-          {translate("PROFILE.PREFERENCES.UNIT_SYSTEM")}
+          {translate('PROFILE.PREFERENCES.UNIT_SYSTEM')}
         </label>
 
         <select
           id="unitSystem"
           value={formData.unitSystem}
-          onChange={(event) => handleUpdateField(setFormData, "unitSystem", event.target.value as UnitSystem)}>
+          onChange={(event) =>
+            handleUpdateField(setFormData, 'unitSystem', event.target.value as UnitSystem)
+          }
+        >
           {Object.values(UnitSystem).map((unitSystem) => (
             <option key={unitSystem} value={unitSystem}>
               {translate(`ENUMS.UNIT_SYSTEM.${unitSystem}`)}
@@ -91,13 +101,14 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
 
       <div className="user-informations__data-row">
         <label htmlFor="theme" className="property">
-          {translate("PROFILE.PREFERENCES.THEME")}
+          {translate('PROFILE.PREFERENCES.THEME')}
         </label>
 
         <select
           id="theme"
           value={formData.theme}
-          onChange={(event) => handleUpdateField(setFormData, "theme", event.target.value as Theme)}>
+          onChange={(event) => handleUpdateField(setFormData, 'theme', event.target.value as Theme)}
+        >
           {Object.values(Theme).map((theme) => (
             <option key={theme} value={theme}>
               {translate(`ENUMS.THEME.${theme}`)}
@@ -108,7 +119,7 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
 
       <div className="user-informations__data-row user-informations__data-row--one-liner">
         <label htmlFor="emailNotifications" className="property">
-          {translate("PROFILE.PREFERENCES.EMAIL_NOTIFICATIONS")}
+          {translate('PROFILE.PREFERENCES.EMAIL_NOTIFICATIONS')}
         </label>
 
         <label className="switch">
@@ -116,7 +127,9 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
             id="emailNotifications"
             type="checkbox"
             checked={formData.emailNotifications}
-            onChange={(event) => handleUpdateField(setFormData, "emailNotifications", event.target.checked)}
+            onChange={(event) =>
+              handleUpdateField(setFormData, 'emailNotifications', event.target.checked)
+            }
           />
           <span className="switch__slider" />
         </label>
@@ -124,7 +137,7 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
 
       <div className="user-informations__data-row user-informations__data-row--one-liner">
         <label htmlFor="pushNotifications" className="property">
-          {translate("PROFILE.PREFERENCES.PUSH_NOTIFICATIONS")}
+          {translate('PROFILE.PREFERENCES.PUSH_NOTIFICATIONS')}
         </label>
 
         <label className="switch">
@@ -132,7 +145,9 @@ export default function UserPreferencesForm({ initialPreferences }: { initialPre
             id="pushNotifications"
             type="checkbox"
             checked={formData.pushNotifications}
-            onChange={(event) => handleUpdateField(setFormData, "pushNotifications", event.target.checked)}
+            onChange={(event) =>
+              handleUpdateField(setFormData, 'pushNotifications', event.target.checked)
+            }
           />
           <span className="switch__slider" />
         </label>

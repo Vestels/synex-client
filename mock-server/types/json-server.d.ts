@@ -1,1 +1,1 @@
-declare module "json-server";
+declare module 'json-server';

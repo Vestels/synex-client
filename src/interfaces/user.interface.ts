@@ -1,4 +1,4 @@
-import { Gender, Language, Theme, UnitSystem, UserStatus } from "@/enums/user.enum";
+import { Gender, Language, Theme, UnitSystem, UserStatus } from '@/enums/user.enum';
 
 export interface User {
   email: string;

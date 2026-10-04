@@ -1,19 +1,19 @@
-import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
+import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
   /* config options here */
-  output: "standalone",
+  output: 'standalone',
   reactCompiler: true,
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "s.gravatar.com",
+        protocol: 'https',
+        hostname: 's.gravatar.com',
       },
       {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
       },
     ],
   },

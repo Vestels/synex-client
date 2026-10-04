@@ -1,4 +1,4 @@
-@use "@/styles/forwarder" as *;
+@use '@/styles/forwarder' as *;
 
 input,
 select,
@@ -39,7 +39,7 @@ textarea {
   }
 }
 
-input[type="date"] {
+input[type='date'] {
   appearance: none;
 
   width: 100%;
@@ -103,7 +103,7 @@ select {
   padding-right: toRem(12px);
   cursor: pointer;
 
-  &:has(option[value=""]:checked) {
+  &:has(option[value='']:checked) {
     color: var(--grey-01);
   }
 
@@ -160,8 +160,8 @@ select {
   }
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
   width: toRem(18px);
   height: toRem(18px);
   border-color: var(--grey-03);
@@ -174,7 +174,7 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   border-radius: toRem(5px);
 
   &:checked {
@@ -182,7 +182,7 @@ input[type="checkbox"] {
     background-color: var(--color-00);
 
     &::after {
-      content: "";
+      content: '';
       display: block;
       width: toRem(5px);
       height: toRem(9px);
@@ -245,7 +245,7 @@ input[type="checkbox"] {
     cursor: pointer;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       width: toRem(20px);
       height: toRem(20px);

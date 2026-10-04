@@ -1,13 +1,13 @@
-import { Suspense } from "react";
-import { getTranslations } from "next-intl/server";
-import UserData from "@/components/user/server/UserData";
-import UserProfileData from "@/components/user/server/UserProfileData";
-import UserIdentitiesData from "@/components/user/server/UserIdentitiesData";
-import UserPreferencesData from "@/components/user/server/UserPreferencesData";
-import SpinnerSvg from "@/components/svgs/SpinnerSvg";
+import { Suspense } from 'react';
+import { getTranslations } from 'next-intl/server';
+import UserData from '@/components/user/server/UserData';
+import UserProfileData from '@/components/user/server/UserProfileData';
+import UserIdentitiesData from '@/components/user/server/UserIdentitiesData';
+import UserPreferencesData from '@/components/user/server/UserPreferencesData';
+import SpinnerSvg from '@/components/svgs/SpinnerSvg';
 
 export default async function UserProfileClient() {
-  const translate = await getTranslations("APP.PROFILE");
+  const translate = await getTranslations('APP.PROFILE');
 
   return (
     <>
@@ -19,7 +19,7 @@ export default async function UserProfileClient() {
 
       <div className="user-data-wrapper">
         <div>
-          <h2 className="section-title">{translate("PERSONAL.TITLE")}</h2>
+          <h2 className="section-title">{translate('PERSONAL.TITLE')}</h2>
           <hr className="divider" />
         </div>
 
@@ -32,7 +32,7 @@ export default async function UserProfileClient() {
 
       <div className="user-data-wrapper">
         <div>
-          <h2 className="section-title">{translate("PREFERENCES.TITLE")}</h2>
+          <h2 className="section-title">{translate('PREFERENCES.TITLE')}</h2>
           <hr className="divider" />
         </div>
 
@@ -45,7 +45,7 @@ export default async function UserProfileClient() {
 
       <div className="user-data-wrapper">
         <div>
-          <h2 className="section-title">{translate("IDENTITIES.TITLE")}</h2>
+          <h2 className="section-title">{translate('IDENTITIES.TITLE')}</h2>
           <hr className="divider" />
         </div>
 

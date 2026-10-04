@@ -1,4 +1,4 @@
-@use "@/styles/forwarder" as *;
+@use '@/styles/forwarder' as *;
 
 *,
 *::before,
@@ -26,7 +26,7 @@ input,
 textarea,
 select,
 summary,
-[role="button"],
+[role='button'],
 [tabindex] {
   -webkit-tap-highlight-color: transparent;
 }
@@ -72,7 +72,7 @@ body {
   display: grid;
   grid-auto-rows: max-content;
   place-items: start center;
-  font-family: "-apple-system, BlinkMacSystemFont", sans-serif;
+  font-family: '-apple-system, BlinkMacSystemFont', sans-serif;
   font-size: 100%; // 1rem (16px)
   line-height: 130%;
   letter-spacing: toRem(0.64px);

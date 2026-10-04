@@ -1,10 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
-import { auth0 } from "@/libs/auth0.lib";
-import { routing } from "@/i18n/routing";
-import { APP_ROUTES, AUTH } from "@/constants/constants";
-import { getCurrentUserAction, getCurrentUserAppBehaviourPreferencesAction } from "./actions/user.actions";
-import { UserAppBehaviourPreferences } from "./interfaces/user.interface";
-import createMiddleware from "next-intl/middleware";
+import { NextRequest, NextResponse } from 'next/server';
+import { auth0 } from '@/libs/auth0.lib';
+import { routing } from '@/i18n/routing';
+import { APP_ROUTES, AUTH } from '@/constants/constants';
+import {
+  getCurrentUserAction,
+  getCurrentUserAppBehaviourPreferencesAction,
+} from '@/actions/user.actions';
+import { UserAppBehaviourPreferences } from '@/interfaces/user.interface';
+import createMiddleware from 'next-intl/middleware';
 
 const handleI18nRouting = createMiddleware(routing);
 
@@ -14,7 +17,7 @@ export async function proxy(request: NextRequest) {
 
   if (url.pathname.startsWith(`/${AUTH.BASE}`)) {
     if (url.pathname === `/${AUTH.BASE}/${AUTH.LOGOUT}`) {
-      response.cookies.delete("app-preferences");
+      response.cookies.delete('app-preferences');
 
       // Mock middleware returns simple NextResponse
       if (response.ok) {
@@ -37,7 +40,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(`/${AUTH.BASE}/${AUTH.LOGOUT}`, request.url));
   }
 
-  const preferencesCookie = request.cookies.get("app-preferences")?.value;
+  const preferencesCookie = request.cookies.get('app-preferences')?.value;
   let appPreferences: UserAppBehaviourPreferences | null = null;
 
   if (preferencesCookie) {
@@ -56,29 +59,33 @@ export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   const currentLocale = routing.locales.find(
-    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
+    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
   );
 
   if (currentLocale !== preferredLocale) {
-    const pathnameWithoutLocale = currentLocale ? pathname.replace(`/${currentLocale}`, "") || "/" : pathname;
+    const pathnameWithoutLocale = currentLocale
+      ? pathname.replace(`/${currentLocale}`, '') || '/'
+      : pathname;
 
-    return NextResponse.redirect(new URL(`/${preferredLocale}${pathnameWithoutLocale}`, request.url));
+    return NextResponse.redirect(
+      new URL(`/${preferredLocale}${pathnameWithoutLocale}`, request.url)
+    );
   }
 
   const i18nResponse = handleI18nRouting(request);
 
   i18nResponse.cookies.set(
-    "app-preferences",
+    'app-preferences',
     JSON.stringify({
       language: appPreferences.language.toLocaleLowerCase(),
       theme: appPreferences.theme.toLocaleLowerCase(),
     }),
     {
       httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-    },
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    }
   );
 
   return i18nResponse;
@@ -86,6 +93,6 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next|assets|fonts|logo|favicon.ico|robots.txt|sitemap.xml|manifest.webmanifest|site.webmanifest).*)",
+    '/((?!api|_next|assets|fonts|logo|favicon.ico|robots.txt|sitemap.xml|manifest.webmanifest|site.webmanifest).*)',
   ],
 };

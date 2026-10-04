@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   COOKIE_CONSENT_OPEN_EVENT_NAME,
@@ -7,21 +7,22 @@ import {
   getServerCookieConsentSnapshot,
   setCookieConsent,
   subscribeCookieConsent,
-} from "@/utils/cookie-consent-util";
-import { useTranslations } from "next-intl";
-import { useEffect, useState, useSyncExternalStore } from "react";
-import Button from "@/components/Button";
+} from '@/utils/cookie-consent-util';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState, useSyncExternalStore } from 'react';
+import Button from '@/components/Button';
 
 export default function CookieConsentGate() {
-  const translate = useTranslations("APP");
+  const translate = useTranslations('APP');
   const consentStatus = useSyncExternalStore(
     subscribeCookieConsent,
     getCookieConsentSnapshot,
-    getServerCookieConsentSnapshot,
+    getServerCookieConsentSnapshot
   );
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const shouldShowConsentPanel = consentStatus !== "pending" && (consentStatus === null || isSettingsOpen);
+  const shouldShowConsentPanel =
+    consentStatus !== 'pending' && (consentStatus === null || isSettingsOpen);
   const shouldRenderConsentPanel = shouldShowConsentPanel;
 
   useEffect(() => {
@@ -42,14 +43,14 @@ export default function CookieConsentGate() {
   }
 
   function acceptCookies() {
-    closeWithConsent("accepted");
+    closeWithConsent('accepted');
   }
 
   //   function rejectCookies() {
   //     closeWithConsent("rejected");
   //   }
 
-  if (consentStatus === "pending") {
+  if (consentStatus === 'pending') {
     return null;
   }
 
@@ -60,12 +61,14 @@ export default function CookieConsentGate() {
           <div className="cookie-consent__wrapper">
             <div className="cookie-consent__content">
               <p className="cookie-consent__sheet">
-                {translate.rich("COOKIE_CONSENT.CONTENT.ONE", {
+                {translate.rich('COOKIE_CONSENT.CONTENT.ONE', {
                   strong: (chunk) => <strong>{chunk}</strong>,
                 })}
               </p>
               <div className="cookie-consent__actions">
-                <Button onClick={acceptCookies}>{translate("COOKIE_CONSENT.ACTIONS.ONLY_ACCEPT")}</Button>
+                <Button onClick={acceptCookies}>
+                  {translate('COOKIE_CONSENT.ACTIONS.ONLY_ACCEPT')}
+                </Button>
                 {/* <Button variant={"secondary"} onClick={rejectCookies}>
                   {translate("COOKIE_CONSENT.ACTIONS.DECLINE")}
                 </Button> */}

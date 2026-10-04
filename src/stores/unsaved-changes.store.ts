@@ -1,6 +1,6 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-export type FormKey = "user" | "preferences" | "identities";
+export type FormKey = 'user' | 'preferences' | 'identities';
 
 type FormAction = () => void | Promise<void>;
 

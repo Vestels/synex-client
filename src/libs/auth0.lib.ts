@@ -1,7 +1,7 @@
-import { Auth0Client } from "@auth0/nextjs-auth0/server";
-import { NextResponse } from "next/server";
-import { mockSession } from "./mock-auth0.lib";
-import { StartInteractiveLoginOptions } from "@auth0/nextjs-auth0/types";
+import { Auth0Client } from '@auth0/nextjs-auth0/server';
+import { NextResponse } from 'next/server';
+import { mockSession } from '@/libs/mock-auth0.lib';
+import { StartInteractiveLoginOptions } from '@auth0/nextjs-auth0/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type MockAuth0ClientType = {
@@ -35,12 +35,12 @@ if (isMock) {
 
     getAccessToken: async () => {
       return {
-        accessToken: "mock-access-token",
+        accessToken: 'mock-access-token',
       };
     },
 
     startInteractiveLogin: async (options: StartInteractiveLoginOptions) => {
-      return NextResponse.redirect(new URL(options?.returnTo || "/", process.env.APP_BASE_URL));
+      return NextResponse.redirect(new URL(options?.returnTo || '/', process.env.APP_BASE_URL));
     },
   };
 } else {
@@ -49,13 +49,13 @@ if (isMock) {
 
     authorizationParameters: {
       audience: process.env.AUTH0_AUDIENCE,
-      scope: "openid profile email",
+      scope: 'openid profile email',
     },
 
     async onCallback(error, context, session) {
       if (error) console.error(error);
-      if (!session) console.error("No session found.");
-      return NextResponse.redirect(new URL("/", process.env.APP_BASE_URL));
+      if (!session) console.error('No session found.');
+      return NextResponse.redirect(new URL('/', process.env.APP_BASE_URL));
     },
   });
 }

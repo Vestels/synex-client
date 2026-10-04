@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
-import Header from "@/components/Header";
-import SideNavigation from "@/components/navigation/SideNavigation";
+import { useEffect, useRef, useState } from 'react';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import Header from '@/components/Header';
+import SideNavigation from '@/components/navigation/SideNavigation';
 
 export default function NavigationShell({ children }: Readonly<{ children: React.ReactNode }>) {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 767px)");
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const headerRef = useRef<HTMLElement>(null);
   const navigationRef = useRef<HTMLElement>(null);
 
@@ -25,10 +25,10 @@ export default function NavigationShell({ children }: Readonly<{ children: React
       }
     };
 
-    window.addEventListener("mousedown", handleOutSideClick);
+    window.addEventListener('mousedown', handleOutSideClick);
 
     return () => {
-      window.removeEventListener("mousedown", handleOutSideClick);
+      window.removeEventListener('mousedown', handleOutSideClick);
     };
   }, [isNavigationOpen]);
 

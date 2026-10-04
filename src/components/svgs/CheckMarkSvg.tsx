@@ -1,4 +1,10 @@
-export default function CheckMarkSvg({ className, color = "currentColor" }: { className?: string; color?: string }) {
+export default function CheckMarkSvg({
+  className,
+  color = 'currentColor',
+}: {
+  className?: string;
+  color?: string;
+}) {
   return (
     <svg
       className={`svg svg-check ${className}`}
@@ -6,7 +12,8 @@ export default function CheckMarkSvg({ className, color = "currentColor" }: { cl
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <rect width="24" height="24" />
       <path
         fillRule="evenodd"

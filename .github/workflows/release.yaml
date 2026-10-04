@@ -53,13 +53,13 @@ jobs:
         if: steps.changesets.outputs.has_changesets == 'true'
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          HUSKY: "0"
+          HUSKY: '0'
         run: pnpm changeset version
 
       - name: Commit version changes
         if: steps.changesets.outputs.has_changesets == 'true'
         env:
-          HUSKY: "0"
+          HUSKY: '0'
         run: |
           VERSION=$(node -p "require('./package.json').version")
           git add .

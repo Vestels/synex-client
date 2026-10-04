@@ -5,7 +5,7 @@ import {
   UserPreference,
   UserProfile,
 } from '@/interfaces/user.interface';
-import { apiClient, ApiError } from '@/libs/api-client.lib';
+import { apiClient } from '@/libs/api-client.lib';
 import { API_ROUTES } from '@/constants/constants';
 import { CurrentUser, UserPreferencesUpdate, UserProfileUpdate } from '@/types/user.type';
 import { auth0 } from '@/libs/auth0.lib';
@@ -17,21 +17,13 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
     return null;
   }
 
-  try {
-    const currentUser = await apiClient<User>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.DATA}`);
+  const currentUser = await apiClient<User>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.DATA}`);
 
-    return {
-      ...currentUser,
-      picture: session.user.picture,
-      email_verified: session.user.email_verified,
-    };
-  } catch (error) {
-    //  && [401, 403, 409, 410].includes(error.status)
-    if (error instanceof ApiError) {
-      return null;
-    }
-    throw error;
-  }
+  return {
+    ...currentUser,
+    picture: session.user.picture,
+    email_verified: session.user.email_verified,
+  };
 }
 
 export async function getCurrentUserProfile(): Promise<UserProfile> {

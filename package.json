@@ -45,9 +45,18 @@
     "glob": "^13.0.6",
     "husky": "^9.1.7",
     "json-server": "0.17.4",
+    "lint-staged": "^17.6.0",
     "nodemon": "^3.1.14",
+    "prettier": "3.9.9",
     "sass": "^1.104.1",
     "tsx": "^4.23.15",
     "typescript": "^5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,scss,md}": "prettier --write"
   }
 }

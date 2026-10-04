@@ -14,15 +14,15 @@ export default function Error({
 
   return (
     <div className="error-page">
-      <h1 className="error-page__label">{translate('STATUS.ERROR')}</h1>
+      <h1 className="error-page__label">{translate('ERRORS.GLOBAL.ERROR')}</h1>
       <Image
         className="error-page__illustration"
-        src={'/assets/illustrations/bushes-of-leaves.svg'}
+        src="/assets/illustrations/bushes-of-leaves.svg"
         width={80}
         height={80}
         alt=""
       />
-      <Button variant={'tertiary'} onClick={() => reset()}>
+      <Button variant={'primary'} onClick={() => reset()}>
         {translate('ACTIONS.ERROR.RETRY')}
       </Button>
     </div>

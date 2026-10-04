@@ -2,18 +2,19 @@ import { Application } from 'express';
 
 const mockRoutes = (server: Application, db: any) => {
   // ─────────────────────────────────────────────────────────────
-  server.get('/users/preferences/app', (_req, res) => {
-    res.json(db.get('app-preferences').value());
-  });
-
-  // ─────────────────────────────────────────────────────────────
   server.get('/users/me', (_req, res) => {
-    res.json(db.get('user-current').value());
+    // return res.status(404).send({ message: 'User not found.' });
+    // return res.status(409).send({ message: 'An account with this email already exists. Account linking is required.' });
+    // return res.status(410).send({ message: 'This Account has been deleted.' });
+    // return res.status(503).send({ message: 'Technical error.' });
+
+    res.status(200).json(db.get('user-current').value());
   });
 
   // ─────────────────────────────────────────────────────────────
   server.delete('/users/me', (_req, res) => {
     // return res.status(404).send({ message: 'User not found.' });
+    // return res.status(503).send({ message: 'Technical error.' });
 
     const currentUser = db.get('user-current').value();
 
@@ -35,6 +36,7 @@ const mockRoutes = (server: Application, db: any) => {
   // ─────────────────────────────────────────────────────────────
   server.post('/users/me/deletion/cancel', (_req, res) => {
     // return res.status(404).send({ message: 'User not found.' });
+    // return res.status(503).send({ message: 'Technical error.' });
 
     const currentUser = db.get('user-current').value();
 
@@ -50,14 +52,16 @@ const mockRoutes = (server: Application, db: any) => {
 
   // ─────────────────────────────────────────────────────────────
   server.get('/users/profile', (_req, res) => {
-    res.json(db.get('user-profile').value());
+    // return res.status(404).send({ message: 'User not found.' });
+    // return res.status(503).send({ message: 'Technical error.' });
+
+    res.status(200).json(db.get('user-profile').value());
   });
 
   // ─────────────────────────────────────────────────────────────
   server.patch('/users/profile', (req, res) => {
-    // return res.status(400).send({ message: 'At least one field must be provided.' });
     // return res.status(404).send({ message: 'User profile not found.' });
-    // return res.status(500).send({ message: 'Technical error.' });
+    // return res.status(503).send({ message: 'Technical error.' });
 
     const profile = db.get('user-profile').value();
 
@@ -71,14 +75,17 @@ const mockRoutes = (server: Application, db: any) => {
 
   // ─────────────────────────────────────────────────────────────
   server.get('/users/preferences', (req, res) => {
-    res.json(db.get('user-preferences').value());
+    // return res.status(404).send({ message: 'User Preferences not found.' });
+    // return res.status(503).send({ message: 'Technical error.' });
+
+    res.status(200).json(db.get('user-preferences').value());
   });
 
   // ─────────────────────────────────────────────────────────────
   server.patch('/users/preferences', (req, res) => {
     // return res.status(400).send({ message: 'At least one field must be provided.' });
     // return res.status(404).send({ message: 'User Preferences not found.' });
-    // return res.status(500).send({ message: 'Technical error.' });
+    // return res.status(503).send({ message: 'Technical error.' });
 
     const preferences = db.get('user-preferences').value();
 
@@ -92,7 +99,10 @@ const mockRoutes = (server: Application, db: any) => {
 
   // ─────────────────────────────────────────────────────────────
   server.get('/users/identities', (_req, res) => {
-    res.json(db.get('user-identities').value());
+    // return res.status(404).send({ message: 'User identities not found.' });
+    // return res.status(503).send({ message: 'Technical error.' });
+
+    res.status(200).json(db.get('user-identities').value());
   });
 };
 

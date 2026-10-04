@@ -1,18 +1,18 @@
 import { auth0 } from '@/libs/auth0.lib';
 
+type ApiRequestOptions = Omit<RequestInit, 'body'> & {
+  body?: unknown;
+};
+
 export class ApiError extends Error {
   constructor(
-    message: string,
-    public readonly status: number
+    public readonly status: number,
+    message: string
   ) {
     super(message);
     this.name = 'ApiError';
   }
 }
-
-type ApiRequestOptions = Omit<RequestInit, 'body'> & {
-  body?: unknown;
-};
 
 export async function apiClient<T>(endpoint: string, options?: ApiRequestOptions): Promise<T> {
   const { token } = await auth0.getAccessToken();
@@ -29,26 +29,21 @@ export async function apiClient<T>(endpoint: string, options?: ApiRequestOptions
     body: options?.body !== undefined ? JSON.stringify(options.body) : undefined,
   });
 
-  if (!response.ok) {
-    const body = await response.text();
+  const text = await response.text();
 
-    console.error('API ERROR:', {
-      url,
-      status: response.status,
-      body,
-    });
+  if (!text) {
+    if (!response.ok) {
+      throw new ApiError(response.status, response.statusText);
+    }
 
-    throw new ApiError(
-      body || `API request failed with status ${response.status}`,
-      response.status
-    );
-  }
-
-  const body = await response.text();
-
-  if (!body) {
     return undefined as T;
   }
 
-  return JSON.parse(body) as T;
+  const body = JSON.parse(text);
+
+  if (!response.ok) {
+    throw new ApiError(response.status, body.message);
+  }
+
+  return body as T;
 }

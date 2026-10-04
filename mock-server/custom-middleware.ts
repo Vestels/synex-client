@@ -15,7 +15,7 @@ const middlewares = jsonServer.defaults({ bodyParser: true });
 const db = router.db;
 
 server.use(middlewares);
-server.use(delay(900, 1100));
+server.use(delay(50, 150));
 server.use(jsonServer.rewriter(mockRewrites));
 
 mockRoutes(server, db);

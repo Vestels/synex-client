@@ -1,10 +1,4 @@
-import {
-  User,
-  UserAppBehaviourPreferences,
-  UserIdentity,
-  UserPreference,
-  UserProfile,
-} from '@/interfaces/user.interface';
+import { User, UserIdentity, UserPreference, UserProfile } from '@/interfaces/user.interface';
 import { apiClient } from '@/libs/api-client.lib';
 import { API_ROUTES } from '@/constants/constants';
 import { CurrentUser, UserPreferencesUpdate, UserProfileUpdate } from '@/types/user.type';
@@ -13,14 +7,14 @@ import { auth0 } from '@/libs/auth0.lib';
 export async function getCurrentUser(): Promise<CurrentUser | null> {
   const session = await auth0.getSession();
 
-  if (!session) {
-    return null;
-  }
+  if (!session) return null;
 
-  const currentUser = await apiClient<User>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.DATA}`);
+  const user = await apiClient<User>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.DATA}`);
+
+  if (!user) return null;
 
   return {
-    ...currentUser,
+    ...user,
     picture: session.user.picture,
     email_verified: session.user.email_verified,
   };
@@ -40,12 +34,6 @@ export async function updateCurrentUserProfile(profileData: UserProfileUpdate): 
 export async function getCurrentUserPreferences(): Promise<UserPreference> {
   return await apiClient<UserPreference>(
     `${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.PREFERENCES}`
-  );
-}
-
-export async function getCurrentUserAppBehaviourPreferences(): Promise<UserAppBehaviourPreferences> {
-  return await apiClient<UserAppBehaviourPreferences>(
-    `${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.PREFERENCES}/${API_ROUTES.USERS.APP_PREFERENCES}`
   );
 }
 

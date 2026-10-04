@@ -1,11 +1,11 @@
 import { Auth0Client } from '@auth0/nextjs-auth0/server';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { mockSession } from '@/libs/mock-auth0.lib';
-import { StartInteractiveLoginOptions } from '@auth0/nextjs-auth0/types';
+import { AUTH } from '@/constants/constants';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type MockAuth0ClientType = {
-  middleware(): any;
+  middleware(req?: any): any;
   getSession(): any | null;
   getAccessToken: (options?: any) => any;
   startInteractiveLogin: (options?: any) => Promise<NextResponse>;
@@ -25,7 +25,13 @@ let auth0Instance: MockAuth0ClientType | Auth0Client;
 
 if (isMock) {
   auth0Instance = {
-    middleware: () => {
+    middleware: async (request: NextRequest) => {
+      const url = new URL(request.url);
+
+      if (url.pathname === `/${AUTH.BASE}/${AUTH.LOGOUT}`) {
+        return NextResponse.redirect(new URL(`/mock/logout`, request.url));
+      }
+
       return NextResponse.next();
     },
 
@@ -39,8 +45,8 @@ if (isMock) {
       };
     },
 
-    startInteractiveLogin: async (options: StartInteractiveLoginOptions) => {
-      return NextResponse.redirect(new URL(options?.returnTo || '/', process.env.APP_BASE_URL));
+    startInteractiveLogin: async () => {
+      return NextResponse.redirect(new URL(`/mock/link-account`, process.env.APP_BASE_URL));
     },
   };
 } else {

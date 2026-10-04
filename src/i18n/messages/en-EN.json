@@ -61,6 +61,10 @@
         "TITLE": "Bejelentkezési módok",
         "CREATED_AT": "Létrehozva:",
         "LAST_USED_AT": "Utolsó használat:",
+        "PASSWORD": {
+          "CONNECT": "Jelszó hozzáadása",
+          "DISCONNECT": "Jelszó eltávolítása"
+        },
         "GOOGLE": {
           "CONNECT": "Google hozzáadása",
           "DISCONNECT": "Google eltávolítása"
@@ -98,10 +102,6 @@
         "GOOGLE": "Google"
       }
     },
-    "STATUS": {
-      "ERROR": "Hoppá. Valami hiba történt. Próbáld újra.",
-      "NOT_FOUND": "Légüres térbe kerültél."
-    },
     "COOKIE_CONSENT": {
       "CONTENT": {
         "ONE": "A weboldal működéséhez és a biztonságos bejelentkezéshez szükséges cookie-kat használunk. Jelenleg <strong>nincs analitika vagy marketing célú adatgyűjtés</strong>, és ilyen célból nem osztunk meg adatokat harmadik felekkel."
@@ -111,6 +111,13 @@
         "ACCEPTS": "Elfogadás",
         "DECLINE": "Elutasítás",
         "ONLY_ACCEPT": "Értem"
+      }
+    },
+    "ERRORS": {
+      "UNKNOWN": "Technikai hiba történt.",
+      "GLOBAL": {
+        "ERROR": "Hoppá. Valami hiba történt. Próbáld újra.",
+        "NOT_FOUND": "Légüres térbe kerültél."
       }
     }
   }

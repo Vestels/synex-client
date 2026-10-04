@@ -87,10 +87,8 @@
       }
 
       &-panel {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
+        display: grid;
+        place-items: center;
         min-height: toRem(100px);
         gap: toRem(16px);
         padding: toRem(24px);
@@ -102,12 +100,16 @@
         border-style: solid;
 
         @include media-breakpoint-up(sm) {
-          justify-content: space-between;
+          grid-template-columns: minmax(0, 1fr) auto;
           border-radius: toRem(8px);
         }
 
         &__status-label {
           text-align: center;
+
+          @include media-breakpoint-up(sm) {
+            justify-self: start;
+          }
         }
 
         &__actions {
@@ -115,6 +117,10 @@
           flex-wrap: wrap;
           align-items: center;
           gap: toRem(8px);
+
+          .button {
+            min-width: toRem(112px);
+          }
         }
       }
     }

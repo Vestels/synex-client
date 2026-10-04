@@ -129,8 +129,12 @@
   }
 
   &--user-action {
+    &:has(.spinner) {
+      max-height: toRem(38px);
+    }
+
     .spinner {
-      max-width: toRem(18px);
+      max-width: toRem(24px);
     }
   }
 }

@@ -29,10 +29,15 @@ export default function UnsavedChangesPanel({
       </p>
 
       <div className="unsaved-changes-panel__actions">
-        <Button onClick={saveChanges} disabled={isSaving}>
+        <Button className="button--user-action" onClick={saveChanges} disabled={isSaving}>
           {isSaving ? <SpinnerSvg /> : translate('ACTIONS.PROFILE.SAVE')}
         </Button>
-        <Button variant={'secondary'} onClick={discardChanges} disabled={isSaving}>
+        <Button
+          className="button--user-action"
+          variant={'secondary'}
+          onClick={discardChanges}
+          disabled={isSaving}
+        >
           {translate('ACTIONS.PROFILE.CANCEL')}
         </Button>
       </div>

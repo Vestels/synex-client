@@ -1,6 +1,6 @@
-import React from 'react';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getCurrentUserIdentitiesAction } from '@/actions/user.actions';
+import { IdentityProvider } from '@/enums/user.enum';
 import TrashSvg from '@/components/svgs/TrashSvg';
 import Button from '@/components/Button';
 
@@ -11,15 +11,24 @@ export default async function UserIdentitiesData() {
     getCurrentUserIdentitiesAction(),
   ]);
 
+  const hasGoogleIdentity = userIdentities?.some(
+    (identity) => identity.provider === IdentityProvider.GOOGLE
+  );
+
+  const hasPasswordIdentity = userIdentities?.some(
+    (identity) => identity.provider === IdentityProvider.PASSWORD
+  );
+
   return (
     <>
-      <div className="user-informations user-informations--identity">
-        {/* TODO */}
-        <a href={`/${locale}/api/auth/link`}>Google fiók csatolása</a>
+      <div className="user-identities">
         {userIdentities && userIdentities.length > 0 && (
           <>
             {userIdentities.map((identity) => (
-              <React.Fragment key={identity.provider}>
+              <div
+                className="user-informations user-informations--identity"
+                key={identity.provider}
+              >
                 <div className="user-informations__header">
                   <p>{translate(`ENUMS.IDENTITY_PROVIDER.${identity.provider}`)}</p>
                   <Button variant={'subtle'} iconOnly={true}>
@@ -52,8 +61,21 @@ export default async function UserIdentitiesData() {
                     '-'
                   )}
                 </div>
-              </React.Fragment>
+              </div>
             ))}
+
+            {/* TODO */}
+            {!hasGoogleIdentity && (
+              <a href={`/${locale}/api/auth/link`} className="button button--primary">
+                Google fiók csatolása
+              </a>
+            )}
+
+            {!hasPasswordIdentity && (
+              <a href={`/${locale}/api/auth/link`} className="button button--primary">
+                Jelszó beállítása
+              </a>
+            )}
           </>
         )}
       </div>

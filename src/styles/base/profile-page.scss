@@ -24,8 +24,19 @@
       }
 
       &--identities {
+        gap: toRem(24px);
+
         @include media-breakpoint-up(sm) {
           padding-inline: toRem(16px);
+        }
+
+        .user-identities {
+          display: grid;
+          gap: toRem(24px);
+
+          a.button {
+            justify-self: start;
+          }
         }
       }
     }
@@ -79,11 +90,6 @@
         font-size: toRem(14px);
         line-height: 140%;
         font-weight: 700;
-
-        &--required {
-          display: flex;
-          align-items: center;
-        }
       }
 
       .value {

@@ -10,6 +10,7 @@ const resetFunctions = new Map<FormKey, FormAction>();
 interface UnsavedChangesState {
   changedForms: Set<FormKey>;
   isSaving: boolean;
+  error: boolean;
 
   registerForm: (key: FormKey, save: FormAction, reset: FormAction) => void;
   unregisterForm: (key: FormKey) => void;
@@ -24,6 +25,7 @@ interface UnsavedChangesState {
 export const useUnsavedChangesStore = create<UnsavedChangesState>((set, get) => ({
   changedForms: new Set(),
   isSaving: false,
+  error: false,
 
   registerForm: (key, save, reset) => {
     saveFunctions.set(key, save);
@@ -63,12 +65,14 @@ export const useUnsavedChangesStore = create<UnsavedChangesState>((set, get) => 
 
   saveChanges: async () => {
     const { changedForms } = get();
-    set({ isSaving: true });
+    set({ isSaving: true, error: false });
 
     try {
       await Promise.all(Array.from(changedForms).map((key) => saveFunctions.get(key)?.()));
 
       set({ changedForms: new Set() });
+    } catch {
+      set({ error: true });
     } finally {
       set({ isSaving: false });
     }
@@ -81,6 +85,6 @@ export const useUnsavedChangesStore = create<UnsavedChangesState>((set, get) => 
       resetFunctions.get(key)?.();
     });
 
-    set({ changedForms: new Set() });
+    set({ changedForms: new Set(), error: false });
   },
 }));

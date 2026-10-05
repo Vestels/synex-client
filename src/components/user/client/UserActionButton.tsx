@@ -1,13 +1,14 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import {
   deleteCurrentUserAction,
   requestClearDeleteForCurrentUserAction,
 } from '@/actions/user.actions';
+import { useRouter } from 'next/navigation';
 import Button from '@/components/Button';
 import SpinnerSvg from '@/components/svgs/SpinnerSvg';
-import { useRouter } from 'next/navigation';
+import ErrorSvg from '@/components/svgs/ErrorSvg';
 
 interface UserActionButtonProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ interface UserActionButtonProps {
 export default function UserActionButton({ children, onClick }: UserActionButtonProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState(false);
 
   const handleClick = () => {
     startTransition(async () => {
@@ -27,9 +29,10 @@ export default function UserActionButton({ children, onClick }: UserActionButton
           await requestClearDeleteForCurrentUserAction();
         }
 
+        setError(false);
         router.refresh();
-      } catch (error) {
-        console.error(error);
+      } catch {
+        setError(true);
       }
     });
   };
@@ -41,6 +44,7 @@ export default function UserActionButton({ children, onClick }: UserActionButton
       disabled={isPending}
       onClick={handleClick}
     >
+      {error && <ErrorSvg />}
       {isPending ? <SpinnerSvg /> : children}
     </Button>
   );

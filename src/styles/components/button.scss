@@ -136,5 +136,9 @@
     .spinner {
       max-width: toRem(24px);
     }
+
+    .svg-error {
+      color: var(--red-01);
+    }
   }
 }

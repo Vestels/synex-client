@@ -71,7 +71,7 @@
 
       @include media-breakpoint-up(md) {
         left: 50%;
-        width: min(calc(100% - #{toRem(32px)}), #{toRem(560px)});
+        width: min(calc(100% - #{toRem(32px)}), #{toRem(680px)});
         transform: translateY(150%) translateX(-50%);
         bottom: toRem(8px);
         padding: toRem(16px);
@@ -108,6 +108,7 @@
           text-align: center;
 
           @include media-breakpoint-up(sm) {
+            text-align: left;
             justify-self: start;
           }
         }
@@ -121,6 +122,11 @@
           .button {
             min-width: toRem(112px);
           }
+        }
+
+        .svg-error {
+          color: var(--red-01);
+          max-width: toRem(18px);
         }
       }
     }

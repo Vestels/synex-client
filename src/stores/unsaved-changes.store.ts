@@ -9,8 +9,8 @@ const resetFunctions = new Map<FormKey, FormAction>();
 
 interface UnsavedChangesState {
   changedForms: Set<FormKey>;
+  errorForms: Set<FormKey>;
   isSaving: boolean;
-  error: boolean;
 
   registerForm: (key: FormKey, save: FormAction, reset: FormAction) => void;
   unregisterForm: (key: FormKey) => void;
@@ -24,8 +24,8 @@ interface UnsavedChangesState {
 
 export const useUnsavedChangesStore = create<UnsavedChangesState>((set, get) => ({
   changedForms: new Set(),
+  errorForms: new Set(),
   isSaving: false,
-  error: false,
 
   registerForm: (key, save, reset) => {
     saveFunctions.set(key, save);
@@ -59,23 +59,36 @@ export const useUnsavedChangesStore = create<UnsavedChangesState>((set, get) => 
       const changedForms = new Set(state.changedForms);
       changedForms.delete(key);
 
-      return { changedForms };
+      const errorForms = new Set(state.errorForms);
+      errorForms.delete(key);
+
+      return { changedForms, errorForms };
     });
   },
 
   saveChanges: async () => {
+    set({ isSaving: true, errorForms: new Set() });
     const { changedForms } = get();
-    set({ isSaving: true, error: false });
+    const nextChangedForms = new Set(changedForms);
+    const nextErrorForms = new Set<FormKey>();
 
-    try {
-      await Promise.all(Array.from(changedForms).map((key) => saveFunctions.get(key)?.()));
-
-      set({ changedForms: new Set() });
-    } catch {
-      set({ error: true });
-    } finally {
-      set({ isSaving: false });
+    for (const key of Array.from(changedForms)) {
+      try {
+        const saveFn = saveFunctions.get(key);
+        if (saveFn) {
+          await saveFn();
+          nextChangedForms.delete(key);
+        }
+      } catch {
+        nextErrorForms.add(key);
+      }
     }
+
+    set({
+      changedForms: nextChangedForms,
+      errorForms: nextErrorForms,
+      isSaving: false,
+    });
   },
 
   discardChanges: () => {
@@ -85,6 +98,6 @@ export const useUnsavedChangesStore = create<UnsavedChangesState>((set, get) => 
       resetFunctions.get(key)?.();
     });
 
-    set({ changedForms: new Set(), error: false });
+    set({ changedForms: new Set(), errorForms: new Set() });
   },
 }));

@@ -1,3 +1,5 @@
+'use server';
+
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getCurrentUserIdentitiesAction } from '@/actions/user.actions';
 import { IdentityProvider } from '@/enums/user.enum';

@@ -1,5 +1,8 @@
 import { Application } from 'express';
 
+// The cache strategy is set to 'no-store' in mock mode to ensure
+// that simulated backend errors function correctly without caching.
+
 const mockRoutes = (server: Application, db: any) => {
   // ─────────────────────────────────────────────────────────────
   server.get('/users/me', (_req, res) => {

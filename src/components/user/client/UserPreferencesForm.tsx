@@ -8,6 +8,7 @@ import { getChangedFields, handleUpdateField } from '@/utils/form.util';
 import { useUnsavedChangesStore } from '@/stores/unsaved-changes.store';
 import { updateCurrentUserPreferencesAction } from '@/actions/user.actions';
 import { useRouter } from 'next/navigation';
+import { useShallow } from 'zustand/shallow';
 
 export default function UserPreferencesForm({
   initialPreferences,
@@ -19,10 +20,16 @@ export default function UserPreferencesForm({
   const [formData, setFormData] = useState<UserPreference>(initialPreferences);
   const formDataRef = useRef(formData);
 
-  const registerForm = useUnsavedChangesStore((state) => state.registerForm);
-  const unregisterForm = useUnsavedChangesStore((state) => state.unregisterForm);
-  const markChanged = useUnsavedChangesStore((state) => state.markChanged);
-  const markSaved = useUnsavedChangesStore((state) => state.markSaved);
+  const { registerForm, unregisterForm, markChanged, markSaved, isPreferencesFormError } =
+    useUnsavedChangesStore(
+      useShallow((state) => ({
+        registerForm: state.registerForm,
+        unregisterForm: state.unregisterForm,
+        markChanged: state.markChanged,
+        markSaved: state.markSaved,
+        isPreferencesFormError: state.errorForms.has('preferences'),
+      }))
+    );
 
   useEffect(() => {
     formDataRef.current = formData;
@@ -66,6 +73,7 @@ export default function UserPreferencesForm({
 
         <select
           id="language"
+          className={`${isPreferencesFormError ? 'input--error' : ''}`}
           value={formData.language}
           onChange={(event) =>
             handleUpdateField(setFormData, 'language', event.target.value as Language)
@@ -86,6 +94,7 @@ export default function UserPreferencesForm({
 
         <select
           id="unitSystem"
+          className={`${isPreferencesFormError ? 'input--error' : ''}`}
           value={formData.unitSystem}
           onChange={(event) =>
             handleUpdateField(setFormData, 'unitSystem', event.target.value as UnitSystem)
@@ -106,6 +115,7 @@ export default function UserPreferencesForm({
 
         <select
           id="theme"
+          className={`${isPreferencesFormError ? 'input--error' : ''}`}
           value={formData.theme}
           onChange={(event) => handleUpdateField(setFormData, 'theme', event.target.value as Theme)}
         >
@@ -122,7 +132,7 @@ export default function UserPreferencesForm({
           {translate('PROFILE.PREFERENCES.EMAIL_NOTIFICATIONS')}
         </label>
 
-        <label className="switch">
+        <label className={`switch ${isPreferencesFormError ? 'switch--error' : ''}`}>
           <input
             id="emailNotifications"
             type="checkbox"
@@ -140,7 +150,7 @@ export default function UserPreferencesForm({
           {translate('PROFILE.PREFERENCES.PUSH_NOTIFICATIONS')}
         </label>
 
-        <label className="switch">
+        <label className={`switch ${isPreferencesFormError ? 'switch--error' : ''}`}>
           <input
             id="pushNotifications"
             type="checkbox"

@@ -1,6 +1,9 @@
 import { getTranslations } from 'next-intl/server';
+import isAuthenticated from '@/libs/authenticated.lib';
 
 export default async function Home() {
+  await isAuthenticated();
+
   const translate = await getTranslations('APP');
 
   return (

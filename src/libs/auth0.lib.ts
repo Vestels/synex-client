@@ -1,27 +1,13 @@
+import 'server-only';
+
 import { Auth0Client } from '@auth0/nextjs-auth0/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { mockSession } from '@/libs/mock-auth0.lib';
 import { AUTH } from '@/constants/constants';
+import { MockAuth0ClientType } from '@/types/auth0.types';
+import { isMock } from '@/libs/mock.lib';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-type MockAuth0ClientType = {
-  middleware(req?: any): any;
-  getSession(): any | null;
-  getAccessToken: (options?: any) => any;
-  startInteractiveLogin: (options?: any) => Promise<NextResponse>;
-  // methods...
-};
-/* eslint-enable @typescript-eslint/no-explicit-any */
-
-// Auth0 environment configuration is the source of truth.
-const isMock =
-  !process.env.AUTH0_DOMAIN ||
-  !process.env.AUTH0_AUDIENCE ||
-  !process.env.AUTH0_CLIENT_ID ||
-  !process.env.AUTH0_CLIENT_SECRET ||
-  !process.env.AUTH0_SECRET;
-
-let auth0Instance: MockAuth0ClientType | Auth0Client;
+let auth0Instance: Auth0Client | MockAuth0ClientType;
 
 if (isMock) {
   auth0Instance = {
@@ -41,7 +27,8 @@ if (isMock) {
 
     getAccessToken: async () => {
       return {
-        accessToken: 'mock-access-token',
+        token: 'mock-access-token',
+        expiresAt: Math.floor(Date.now() / 1000) + 86400,
       };
     },
 

@@ -230,7 +230,7 @@ input[type='checkbox'] {
       background-color: var(--color-00);
 
       &::before {
-        transform: translateX((toRem(22px)));
+        transform: translateX(toRem(22px));
       }
     }
   }
@@ -257,4 +257,17 @@ input[type='checkbox'] {
       transition-property: transform;
     }
   }
+
+  &--error {
+    .switch__slider,
+    input:checked + .switch__slider {
+      background-color: var(--red-01);
+    }
+  }
+}
+
+.input--error {
+  border-color: var(--red-01);
+  border-width: toRem(1px);
+  border-style: solid;
 }

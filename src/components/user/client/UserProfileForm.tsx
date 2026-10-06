@@ -8,54 +8,57 @@ import { getChangedFields, handleUpdateField } from '@/utils/form.util';
 import { useUnsavedChangesStore } from '@/stores/unsaved-changes.store';
 import { updateCurrentUserProfileAction } from '@/actions/user.actions';
 import { useRouter } from 'next/navigation';
+import { useShallow } from 'zustand/shallow';
 
-export default function UserProfileForm({
-  initialPreferences,
-}: {
-  initialPreferences: UserProfile;
-}) {
+export default function UserProfileForm({ initialProfile }: { initialProfile: UserProfile }) {
   const router = useRouter();
   const translate = useTranslations('APP');
-  const [formData, setFormData] = useState<UserProfile>(initialPreferences);
+  const [formData, setFormData] = useState<UserProfile>(initialProfile);
   const formDataRef = useRef(formData);
 
-  const registerForm = useUnsavedChangesStore((state) => state.registerForm);
-  const unregisterForm = useUnsavedChangesStore((state) => state.unregisterForm);
-  const markChanged = useUnsavedChangesStore((state) => state.markChanged);
-  const markSaved = useUnsavedChangesStore((state) => state.markSaved);
+  const { registerForm, unregisterForm, markChanged, markSaved, isProfileFormError } =
+    useUnsavedChangesStore(
+      useShallow((state) => ({
+        registerForm: state.registerForm,
+        unregisterForm: state.unregisterForm,
+        markChanged: state.markChanged,
+        markSaved: state.markSaved,
+        isProfileFormError: state.errorForms.has('user'),
+      }))
+    );
 
   useEffect(() => {
     formDataRef.current = formData;
 
-    const changed = JSON.stringify(formData) !== JSON.stringify(initialPreferences);
+    const changed = JSON.stringify(formData) !== JSON.stringify(initialProfile);
 
     if (changed) {
       markChanged('user');
     } else {
       markSaved('user');
     }
-  }, [formData, initialPreferences, markChanged, markSaved]);
+  }, [formData, initialProfile, markChanged, markSaved]);
 
   useEffect(() => {
     registerForm(
       'user',
 
       async () => {
-        const changedFields = getChangedFields(initialPreferences, formDataRef.current);
+        const changedFields = getChangedFields(initialProfile, formDataRef.current);
         await updateCurrentUserProfileAction(changedFields);
         router.refresh();
       },
 
       () => {
-        setFormData(initialPreferences);
-        formDataRef.current = initialPreferences;
+        setFormData(initialProfile);
+        formDataRef.current = initialProfile;
       }
     );
 
     return () => {
       unregisterForm('user');
     };
-  }, [registerForm, unregisterForm, initialPreferences, router]);
+  }, [registerForm, unregisterForm, initialProfile, router]);
 
   return (
     <div className="user-informations">
@@ -68,7 +71,7 @@ export default function UserProfileForm({
         <input
           id="birthDate"
           type="date"
-          className="value"
+          className={`value ${isProfileFormError ? 'input--error' : ''}`}
           value={formData.birthDate ?? ''}
           required
           onChange={(event) => handleUpdateField(setFormData, 'birthDate', event.target.value)}
@@ -83,7 +86,7 @@ export default function UserProfileForm({
 
         <select
           id="gender"
-          className="value"
+          className={`value ${isProfileFormError ? 'input--error' : ''}`}
           value={formData.gender ?? ''}
           onChange={(event) =>
             handleUpdateField(setFormData, 'gender', event.target.value as Gender)
@@ -109,7 +112,7 @@ export default function UserProfileForm({
         <input
           id="nickname"
           type="text"
-          className="value"
+          className={`value ${isProfileFormError ? 'input--error' : ''}`}
           value={formData.nickname ?? ''}
           onChange={(event) => handleUpdateField(setFormData, 'nickname', event.target.value)}
         />
@@ -123,7 +126,7 @@ export default function UserProfileForm({
         <input
           id="lastName"
           type="text"
-          className="value"
+          className={`value ${isProfileFormError ? 'input--error' : ''}`}
           value={formData.lastName ?? ''}
           onChange={(event) => handleUpdateField(setFormData, 'lastName', event.target.value)}
         />
@@ -137,7 +140,7 @@ export default function UserProfileForm({
         <input
           id="firstName"
           type="text"
-          className="value"
+          className={`value ${isProfileFormError ? 'input--error' : ''}`}
           value={formData.firstName ?? ''}
           onChange={(event) => handleUpdateField(setFormData, 'firstName', event.target.value)}
         />

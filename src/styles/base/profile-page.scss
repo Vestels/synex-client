@@ -49,6 +49,7 @@
 
     &__data-row {
       display: grid;
+      align-items: center;
       gap: toRem(4px);
       min-height: toRem(24px);
 

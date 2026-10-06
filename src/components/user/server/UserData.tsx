@@ -1,3 +1,5 @@
+'use server';
+
 import { getTranslations } from 'next-intl/server';
 import { formatDate } from '@/utils/format-date.util';
 import { getCurrentUserAction } from '@/actions/user.actions';

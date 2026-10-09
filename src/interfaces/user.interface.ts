@@ -39,4 +39,5 @@ export interface UserIdentity {
   provider: string;
   createdAt: string;
   lastUsedAt: string;
+  isPrimary: boolean;
 }

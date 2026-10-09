@@ -1,5 +1,3 @@
-import 'server-only';
-
 import { auth0 } from '@/libs/auth0.lib';
 
 type ApiRequestOptions = Omit<RequestInit, 'body'> & {

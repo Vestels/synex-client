@@ -4,3 +4,4 @@ allowBuilds:
   'sharp': true
   '@swc/core': true
   'esbuild': true
+  browser-tabs-lock: true

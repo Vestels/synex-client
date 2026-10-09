@@ -2,11 +2,12 @@ export const AUTH = {
   BASE: 'auth',
   LOGIN: 'login',
   LOGOUT: 'logout',
-  CONNECT: 'connect?connection=',
-  CONNECTION: {
+  LINKING: 'link',
+  CONNECTIONS: {
     PASSWORD: 'Username-Password-Authentication',
     GOOGLE: 'google-oauth2',
   },
+  CALLBACK: 'callback',
 } as const;
 
 export const APP_ROUTES = {

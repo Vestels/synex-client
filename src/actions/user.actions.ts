@@ -9,6 +9,7 @@ import {
 import { UserIdentity, UserPreference, UserProfile } from '@/interfaces/user.interface';
 import {
   deleteCurrentUser,
+  deleteLinkedAccount,
   requestClearDeleteForCurrentUser,
   updateCurrentUserPreferences,
   updateCurrentUserProfile,
@@ -55,8 +56,14 @@ export async function deleteCurrentUserAction() {
   updateTag('user');
 }
 
-export async function requestClearDeleteForCurrentUserAction() {
+export async function requestClearDeleteForCurrentUserAction(): Promise<void> {
   await requestClearDeleteForCurrentUser();
 
   updateTag('user');
+}
+
+export async function deleteLinkedAccountAction(provider: string): Promise<void> {
+  await deleteLinkedAccount(provider);
+
+  updateTag('user-identities');
 }

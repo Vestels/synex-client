@@ -1,5 +1,3 @@
-import 'server-only';
-
 import { Auth0Client } from '@auth0/nextjs-auth0/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { mockSession } from '@/libs/mock-auth0.lib';
@@ -38,8 +36,6 @@ if (isMock) {
   };
 } else {
   auth0Instance = new Auth0Client({
-    enableConnectAccountEndpoint: true,
-
     authorizationParameters: {
       audience: process.env.AUTH0_AUDIENCE,
       scope: 'openid profile email',
@@ -48,7 +44,7 @@ if (isMock) {
     async onCallback(error, context, session) {
       if (error) console.error(error);
       if (!session) console.error('No session found.');
-      return NextResponse.redirect(new URL('/', process.env.APP_BASE_URL));
+      return NextResponse.redirect(new URL(context.returnTo || '/', context.appBaseUrl));
     },
   });
 }

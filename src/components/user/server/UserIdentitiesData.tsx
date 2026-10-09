@@ -1,17 +1,25 @@
 'use server';
 
-import { getLocale, getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { getCurrentUserIdentitiesAction } from '@/actions/user.actions';
 import { IdentityProvider } from '@/enums/user.enum';
-import TrashSvg from '@/components/svgs/TrashSvg';
-import Button from '@/components/Button';
+import { AUTH } from '@/constants/constants';
+import LinkAccountButton from '@/components/user/client/LinkAccountButton';
+import DeleteLinkedAccountButton from '@/components/user/client/DeleteLinkedAccountButton';
 
 export default async function UserIdentitiesData() {
-  const [locale, translate, userIdentities] = await Promise.all([
-    getLocale(),
+  const [translate, userIdentities] = await Promise.all([
     getTranslations('APP'),
     getCurrentUserIdentitiesAction(),
   ]);
+
+  const sortedUserIdentities = userIdentities?.toSorted((a, b) => {
+    if (a.isPrimary !== b.isPrimary) {
+      return a.isPrimary ? -1 : 1;
+    }
+
+    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+  });
 
   const hasGoogleIdentity = userIdentities?.some(
     (identity) => identity.provider === IdentityProvider.GOOGLE
@@ -21,21 +29,37 @@ export default async function UserIdentitiesData() {
     (identity) => identity.provider === IdentityProvider.PASSWORD
   );
 
+  const missingProvider = !hasGoogleIdentity
+    ? {
+        provider: IdentityProvider.GOOGLE,
+        connection: AUTH.CONNECTIONS.GOOGLE,
+        translate: translate('PROFILE.IDENTITIES.GOOGLE.CONNECT'),
+      }
+    : !hasPasswordIdentity
+      ? {
+          provider: IdentityProvider.PASSWORD,
+          connection: AUTH.CONNECTIONS.PASSWORD,
+          translate: translate('PROFILE.IDENTITIES.PASSWORD.CONNECT'),
+        }
+      : null;
+
   return (
     <>
       <div className="user-identities">
-        {userIdentities && userIdentities.length > 0 && (
+        {sortedUserIdentities && sortedUserIdentities.length > 0 && (
           <>
-            {userIdentities.map((identity) => (
+            {sortedUserIdentities.map((identity) => (
               <div
                 className="user-informations user-informations--identity"
                 key={identity.provider}
               >
                 <div className="user-informations__header">
                   <p>{translate(`ENUMS.IDENTITY_PROVIDER.${identity.provider}`)}</p>
-                  <Button variant={'subtle'} iconOnly={true}>
-                    <TrashSvg />
-                  </Button>
+                  {!identity.isPrimary ? (
+                    <DeleteLinkedAccountButton provider={identity.provider} />
+                  ) : (
+                    translate('PROFILE.IDENTITIES.PRIMARY')
+                  )}
                 </div>
 
                 <hr className="divider" />
@@ -66,17 +90,12 @@ export default async function UserIdentitiesData() {
               </div>
             ))}
 
-            {/* TODO */}
-            {!hasGoogleIdentity && (
-              <a href={`/${locale}/api/auth/link`} className="button button--primary">
-                Google fiók csatolása
-              </a>
-            )}
-
-            {!hasPasswordIdentity && (
-              <a href={`/${locale}/api/auth/link`} className="button button--primary">
-                Jelszó beállítása
-              </a>
+            {missingProvider && (
+              <LinkAccountButton
+                provider={missingProvider.provider}
+                connection={missingProvider.connection}
+                translate={missingProvider.translate}
+              />
             )}
           </>
         )}

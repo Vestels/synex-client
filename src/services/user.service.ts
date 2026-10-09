@@ -49,3 +49,12 @@ export async function requestClearDeleteForCurrentUser(): Promise<void> {
     }
   );
 }
+
+export async function deleteLinkedAccount(provider: string): Promise<void> {
+  await requireAuth();
+
+  await apiClient<void>(
+    `${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.IDENTITIES}/${API_ROUTES.USERS.LINK_IDENTTIY}`,
+    { method: 'DELETE', body: { provider } }
+  );
+}

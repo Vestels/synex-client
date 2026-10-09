@@ -1,9 +1,10 @@
 import { AUTH } from '@/constants/constants';
 import { Auth0Client } from '@auth0/auth0-spa-js';
+import { isMock } from '@/libs/mock.lib';
 
 let Auth0ClientSpa: Auth0Client | null = null;
 
-export async function getAuth0ClientSpa() {
+async function getAuth0ClientSpa() {
   if (Auth0ClientSpa) return Auth0ClientSpa;
 
   Auth0ClientSpa = new Auth0Client({
@@ -21,6 +22,12 @@ export async function getAuth0ClientSpa() {
 }
 
 export async function authenticateAuth0ClientSpa(connection: string) {
+  if (isMock) {
+    return {
+      idToken: 'mock-secondary-id-token',
+    };
+  }
+
   const client = await getAuth0ClientSpa();
 
   await client.loginWithPopup({

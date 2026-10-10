@@ -73,6 +73,12 @@
       },
       "UNSAVED_CHANGES_PANEL": {
         "LABEL": "Nem mentett módosítások"
+      },
+      "VALIDATORS": {
+        "BIRTH_DATE": "A születési dátum nem megfelelő!",
+        "NICKNAME": "Minimum 4 karakter hosszú!",
+        "LASTNAME": "Minimum 3 karakter hosszú!",
+        "FIRSTNAME": "Minimum 3 karakter hosszú!"
       }
     },
     "ENUMS": {

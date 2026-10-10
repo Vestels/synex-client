@@ -7,7 +7,7 @@ import UserProfileData from '@/components/user/server/UserProfileData';
 import UserIdentitiesData from '@/components/user/server/UserIdentitiesData';
 import UserPreferencesData from '@/components/user/server/UserPreferencesData';
 import SpinnerSvg from '@/components/svgs/SpinnerSvg';
-import UserSectionTitle from '@/components/user/server/UserSectionTitle';
+import UserSectionTitle from '@/components/user/client/UserSectionTitle';
 
 export default async function UserProfile() {
   const translate = await getTranslations('APP.PROFILE');
@@ -21,7 +21,7 @@ export default async function UserProfile() {
       </div>
 
       <div className="user-data-wrapper">
-        <UserSectionTitle title={translate('PERSONAL.TITLE')} />
+        <UserSectionTitle title={translate('PERSONAL.TITLE')} forSection={'user'} />
 
         <div className="user-data-table">
           <Suspense fallback={<SpinnerSvg />}>
@@ -31,7 +31,7 @@ export default async function UserProfile() {
       </div>
 
       <div className="user-data-wrapper">
-        <UserSectionTitle title={translate('PREFERENCES.TITLE')} />
+        <UserSectionTitle title={translate('PREFERENCES.TITLE')} forSection={'preferences'} />
 
         <div className="user-data-table">
           <Suspense fallback={<SpinnerSvg />}>
@@ -41,7 +41,7 @@ export default async function UserProfile() {
       </div>
 
       <div className="user-data-wrapper">
-        <UserSectionTitle title={translate('IDENTITIES.TITLE')} />
+        <UserSectionTitle title={translate('IDENTITIES.TITLE')} forSection={'identities'} />
 
         <div className="user-data-table user-data-table--identities">
           <Suspense fallback={<SpinnerSvg />}>

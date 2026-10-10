@@ -1,14 +1,16 @@
 'use client';
 
+import { AUTH } from '@/constants/constants';
+import { IdentityProvider } from '@/enums/user.enum';
+import { authenticateAuth0ClientSpa } from '@/libs/auth0-secondary.lib';
+import { useAccountLinkingStore } from '@/stores/account-linking.store';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useShallow } from 'zustand/shallow';
 import Button from '@/components/Button';
 import CheckMarkSvg from '@/components/svgs/CheckMarkSvg';
 import ErrorSvg from '@/components/svgs/ErrorSvg';
 import SpinnerSvg from '@/components/svgs/SpinnerSvg';
-import { AUTH } from '@/constants/constants';
-import { IdentityProvider } from '@/enums/user.enum';
-import { authenticateAuth0ClientSpa } from '@/libs/auth0-secondary.lib';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 type LinkAccountButtonProps = {
   provider: IdentityProvider;
@@ -22,14 +24,21 @@ export default function LinkAccountButton({
   translate,
 }: LinkAccountButtonProps) {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const router = useRouter();
 
+  const { setError, clearError, hasError } = useAccountLinkingStore(
+    useShallow((state) => ({
+      setError: state.setError,
+      clearError: state.clearError,
+      hasError: state.hasError,
+    }))
+  );
+
   const handleLinking = async () => {
     setLoading(true);
-    setError(null);
     setSuccess(false);
+    clearError();
 
     try {
       const { idToken } = await authenticateAuth0ClientSpa(connection);
@@ -52,8 +61,8 @@ export default function LinkAccountButton({
 
       setSuccess(true);
       router.refresh();
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'Unknown Error');
+    } catch {
+      setError();
     } finally {
       setLoading(false);
     }
@@ -62,7 +71,7 @@ export default function LinkAccountButton({
   return (
     <div>
       <Button variant={'primary'} onClick={handleLinking} disabled={loading}>
-        {error && <ErrorSvg />}
+        {hasError && <ErrorSvg />}
         {success && <CheckMarkSvg />}
         {loading ? <SpinnerSvg /> : translate}
       </Button>

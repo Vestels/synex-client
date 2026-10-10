@@ -58,7 +58,7 @@
       }
 
       @include media-breakpoint-up(md) {
-        gap: toRem(16px);
+        column-gap: toRem(16px);
         grid-template-columns: 0.4fr 0.6fr;
       }
 
@@ -145,6 +145,13 @@
             }
           }
         }
+
+        &.error-message {
+          color: var(--red-01);
+          font-size: toRem(12px);
+          line-height: toRem(14px);
+          margin-left: toRem(4px);
+        }
       }
     }
 
@@ -197,6 +204,16 @@
         &__data-row {
           min-height: initial;
         }
+      }
+
+      .svg-error {
+        color: var(--red-01);
+        max-width: toRem(24px);
+      }
+
+      .svg-check {
+        color: var(--color-10);
+        max-width: toRem(24px);
       }
     }
 

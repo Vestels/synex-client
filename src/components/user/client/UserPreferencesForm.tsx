@@ -20,16 +20,14 @@ export default function UserPreferencesForm({
   const [formData, setFormData] = useState<UserPreference>(initialPreferences);
   const formDataRef = useRef(formData);
 
-  const { registerForm, unregisterForm, markChanged, markSaved, isPreferencesFormError } =
-    useUnsavedChangesStore(
-      useShallow((state) => ({
-        registerForm: state.registerForm,
-        unregisterForm: state.unregisterForm,
-        markChanged: state.markChanged,
-        markSaved: state.markSaved,
-        isPreferencesFormError: state.errorForms.has('preferences'),
-      }))
-    );
+  const { registerForm, unregisterForm, markChanged, markSaved } = useUnsavedChangesStore(
+    useShallow((state) => ({
+      registerForm: state.registerForm,
+      unregisterForm: state.unregisterForm,
+      markChanged: state.markChanged,
+      markSaved: state.markSaved,
+    }))
+  );
 
   useEffect(() => {
     formDataRef.current = formData;
@@ -73,7 +71,6 @@ export default function UserPreferencesForm({
 
         <select
           id="language"
-          className={`${isPreferencesFormError ? 'input--error' : ''}`}
           value={formData.language}
           onChange={(event) =>
             handleUpdateField(setFormData, 'language', event.target.value as Language)
@@ -94,7 +91,6 @@ export default function UserPreferencesForm({
 
         <select
           id="unitSystem"
-          className={`${isPreferencesFormError ? 'input--error' : ''}`}
           value={formData.unitSystem}
           onChange={(event) =>
             handleUpdateField(setFormData, 'unitSystem', event.target.value as UnitSystem)
@@ -115,7 +111,6 @@ export default function UserPreferencesForm({
 
         <select
           id="theme"
-          className={`${isPreferencesFormError ? 'input--error' : ''}`}
           value={formData.theme}
           onChange={(event) => handleUpdateField(setFormData, 'theme', event.target.value as Theme)}
         >
@@ -132,7 +127,7 @@ export default function UserPreferencesForm({
           {translate('PROFILE.PREFERENCES.EMAIL_NOTIFICATIONS')}
         </label>
 
-        <label className={`switch ${isPreferencesFormError ? 'switch--error' : ''}`}>
+        <label className="switch">
           <input
             id="emailNotifications"
             type="checkbox"
@@ -150,7 +145,7 @@ export default function UserPreferencesForm({
           {translate('PROFILE.PREFERENCES.PUSH_NOTIFICATIONS')}
         </label>
 
-        <label className={`switch ${isPreferencesFormError ? 'switch--error' : ''}`}>
+        <label className="switch">
           <input
             id="pushNotifications"
             type="checkbox"

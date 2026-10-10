@@ -104,9 +104,6 @@
           gap: toRem(4px);
 
           .status {
-            width: toRem(20px);
-            height: toRem(20px);
-
             &--verified {
               color: var(--color-10);
             }
@@ -184,6 +181,10 @@
       border-width: toRem(1px);
       border-style: solid;
 
+      &.primary {
+        background-color: var(--white-03);
+      }
+
       .divider {
         margin: 0;
       }
@@ -195,9 +196,9 @@
           justify-content: space-between;
           gap: toRem(16px);
 
-          .svg-trash {
-            width: toRem(26px);
-            height: toRem(26px);
+          .svg-lock {
+            color: var(--grey-01);
+            margin: toRem(4px);
           }
         }
 
@@ -205,21 +206,6 @@
           min-height: initial;
         }
       }
-
-      .svg-error {
-        color: var(--red-01);
-        max-width: toRem(24px);
-      }
-
-      .svg-check {
-        color: var(--color-10);
-        max-width: toRem(24px);
-      }
-    }
-
-    .button--user-action {
-      width: auto;
-      text-align: right;
     }
 
     &__error {

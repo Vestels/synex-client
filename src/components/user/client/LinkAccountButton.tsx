@@ -11,6 +11,8 @@ import Button from '@/components/Button';
 import CheckMarkSvg from '@/components/svgs/CheckMarkSvg';
 import ErrorSvg from '@/components/svgs/ErrorSvg';
 import SpinnerSvg from '@/components/svgs/SpinnerSvg';
+import GoogleSvg from '@/components/svgs/GoogleSvg';
+import KeySvg from '@/components/svgs/KeySvg';
 
 type LinkAccountButtonProps = {
   provider: IdentityProvider;
@@ -70,10 +72,21 @@ export default function LinkAccountButton({
 
   return (
     <div>
-      <Button variant={'primary'} onClick={handleLinking} disabled={loading}>
-        {hasError && <ErrorSvg />}
-        {success && <CheckMarkSvg />}
-        {loading ? <SpinnerSvg /> : translate}
+      <Button variant={'subtle'} onClick={handleLinking} disabled={loading}>
+        {/* 1. IKON SZEKCIÓ: Állapottól függően mindig pontosan egy ikon látszik */}
+        {loading ? (
+          <SpinnerSvg />
+        ) : success ? (
+          <CheckMarkSvg />
+        ) : hasError ? (
+          <ErrorSvg />
+        ) : provider === IdentityProvider.GOOGLE ? (
+          <GoogleSvg />
+        ) : provider === IdentityProvider.PASSWORD ? (
+          <KeySvg />
+        ) : null}
+
+        {translate}
       </Button>
     </div>
   );

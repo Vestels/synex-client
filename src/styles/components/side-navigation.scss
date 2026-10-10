@@ -39,12 +39,6 @@
     place-items: start end;
     gap: toRem(8px);
     padding-bottom: toRem(32px);
-
-    &-item {
-      .button {
-        width: auto;
-      }
-    }
   }
 
   .button--logout {
@@ -61,14 +55,8 @@
     text-align: right;
 
     .cookie-consent-settings-button {
-      width: auto;
       justify-self: end;
       margin-bottom: toRem(16px);
-
-      .svg-cookie {
-        width: toRem(24px);
-        height: toRem(24px);
-      }
     }
   }
 }

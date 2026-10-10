@@ -44,8 +44,16 @@ export default function UserActionButton({ children, onClick }: UserActionButton
       disabled={isPending}
       onClick={handleClick}
     >
-      {error && <ErrorSvg />}
-      {isPending ? <SpinnerSvg /> : children}
+      {isPending ? (
+        <SpinnerSvg />
+      ) : error ? (
+        <>
+          <ErrorSvg />
+          {children}
+        </>
+      ) : (
+        children
+      )}
     </Button>
   );
 }

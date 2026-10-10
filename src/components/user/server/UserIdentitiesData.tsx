@@ -6,6 +6,7 @@ import { IdentityProvider } from '@/enums/user.enum';
 import { AUTH } from '@/constants/constants';
 import LinkAccountButton from '@/components/user/client/LinkAccountButton';
 import DeleteLinkedAccountButton from '@/components/user/client/DeleteLinkedAccountButton';
+import LockSvg from '@/components/svgs/LockSvg';
 
 export default async function UserIdentitiesData() {
   const [translate, userIdentities] = await Promise.all([
@@ -50,7 +51,7 @@ export default async function UserIdentitiesData() {
           <>
             {sortedUserIdentities.map((identity) => (
               <div
-                className="user-informations user-informations--identity"
+                className={`user-informations user-informations--identity  ${identity.isPrimary ? 'primary' : ''}`}
                 key={identity.provider}
               >
                 <div className="user-informations__header">
@@ -58,7 +59,7 @@ export default async function UserIdentitiesData() {
                   {!identity.isPrimary ? (
                     <DeleteLinkedAccountButton provider={identity.provider} />
                   ) : (
-                    translate('PROFILE.IDENTITIES.PRIMARY')
+                    <LockSvg />
                   )}
                 </div>
 
@@ -91,11 +92,15 @@ export default async function UserIdentitiesData() {
             ))}
 
             {missingProvider && (
-              <LinkAccountButton
-                provider={missingProvider.provider}
-                connection={missingProvider.connection}
-                translate={missingProvider.translate}
-              />
+              <>
+                <hr className="divider" />
+
+                <LinkAccountButton
+                  provider={missingProvider.provider}
+                  connection={missingProvider.connection}
+                  translate={missingProvider.translate}
+                />
+              </>
             )}
           </>
         )}

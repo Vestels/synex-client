@@ -7,12 +7,12 @@ export default function SpinnerSvg({
 }) {
   return (
     <svg
-      className={`spinner ${className}`}
+      className={`svg svg-spinner ${className}`}
       width="24"
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="http://w3.org"
       aria-hidden="true"
     >
       <circle cx="12" cy="12" r="9" stroke={color} strokeWidth="3" opacity="0.2" />

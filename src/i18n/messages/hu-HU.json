@@ -75,10 +75,10 @@
         "LABEL": "Nem mentett módosítások"
       },
       "VALIDATORS": {
-        "BIRTH_DATE": "A születési dátum nem megfelelő!",
-        "NICKNAME": "Minimum 4 karakter hosszú!",
-        "LASTNAME": "Minimum 3 karakter hosszú!",
-        "FIRSTNAME": "Minimum 3 karakter hosszú!"
+        "BIRTH_DATE": "Kérjük, érvényes születési dátumot adjon meg.",
+        "NICKNAME": "A becenévnek legalább 4 karakterből kell állnia.",
+        "LASTNAME": "A vezetéknévnek legalább 3 karakterből kell állnia.",
+        "FIRSTNAME": "A keresztnévnek legalább 3 karakterből kell állnia."
       }
     },
     "ENUMS": {

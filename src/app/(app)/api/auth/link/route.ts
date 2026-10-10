@@ -28,9 +28,9 @@ export async function POST(request: NextRequest) {
 
     revalidateTag('user-identities', 'max');
 
-    return NextResponse.json({ message: 'Linking successful', status: 200 });
+    return NextResponse.json({ message: 'Linking successful' }, { status: 200 });
   } catch (error) {
     console.error('Link initiate error:', error);
-    return NextResponse.json({ error: 'Internal server error', status: 500 });
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

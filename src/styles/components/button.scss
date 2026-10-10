@@ -12,7 +12,7 @@
 
   background-color: var(--button-primary-background);
 
-  width: 100%;
+  width: auto;
   padding: toRem(8px) toRem(24px);
   margin: 0;
 
@@ -33,10 +33,6 @@
   user-select: none;
   hyphens: manual;
   cursor: pointer;
-
-  @include media-breakpoint-up(xsm) {
-    width: auto;
-  }
 
   @media (hover: hover) {
     &:hover {
@@ -117,7 +113,6 @@
   }
 
   &--icon-only {
-    width: auto;
     padding: toRem(4px);
     border-radius: 50%;
   }
@@ -126,19 +121,5 @@
     pointer-events: none;
     user-select: none;
     touch-action: none;
-  }
-
-  &--user-action {
-    &:has(.spinner) {
-      max-height: toRem(38px);
-    }
-
-    .spinner {
-      max-width: toRem(24px);
-    }
-
-    .svg-error {
-      color: var(--red-01);
-    }
   }
 }

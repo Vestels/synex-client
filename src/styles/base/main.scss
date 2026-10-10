@@ -139,11 +139,6 @@
       font-size: toRem(24px);
       line-height: toRem(32px);
     }
-
-    .svg-error {
-      color: var(--red-01);
-      max-width: toRem(24px);
-    }
   }
 
   &:has(.side-navigation--open) {

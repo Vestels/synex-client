@@ -4,11 +4,5 @@
     "createdAt": "2026-09-16 21:39:57.293837+02",
     "lastUsedAt": "2026-09-28 21:39:57.293837+02",
     "isPrimary": true
-  },
-  {
-    "provider": "GOOGLE",
-    "createdAt": "2026-10-04 21:39:57.293837+02",
-    "lastUsedAt": "2026-10-07 21:39:57.293837+02",
-    "isPrimary": false
   }
 ]

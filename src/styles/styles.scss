@@ -15,3 +15,10 @@
 
 @use '@/styles/shared/input';
 @use '@/styles/shared/spinner';
+
+// TODO - for testing
+html[data-theme='dark'] {
+  body {
+    background-color: black;
+  }
+}

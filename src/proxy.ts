@@ -11,6 +11,10 @@ export async function proxy(request: NextRequest) {
   const response = await auth0.middleware(request);
 
   if (url.pathname.startsWith(`/${AUTH.BASE}`) || url.pathname.startsWith(`/mock`)) {
+    if (url.pathname.endsWith(`${AUTH.LOGOUT}`)) {
+      response.cookies.delete('app-preferences');
+    }
+
     return response;
   }
 

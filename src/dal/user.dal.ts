@@ -18,9 +18,7 @@ async function requireAuth() {
 export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
   const session = await requireAuth();
 
-  const user = await apiClient<User>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.DATA}`, {
-    next: { tags: ['user'] },
-  });
+  const user = await apiClient<User>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.DATA}`);
 
   return {
     ...user,
@@ -32,17 +30,14 @@ export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
 export const getCurrentUserProfile = cache(async (): Promise<UserProfile> => {
   await requireAuth();
 
-  return await apiClient<UserProfile>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.PROFILE}`, {
-    next: { tags: ['user-profile'] },
-  });
+  return await apiClient<UserProfile>(`${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.PROFILE}`);
 });
 
 export const getCurrentUserPreferences = cache(async (): Promise<UserPreference> => {
   await requireAuth();
 
   return await apiClient<UserPreference>(
-    `${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.PREFERENCES}`,
-    { next: { tags: ['user-preferences'] } }
+    `${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.PREFERENCES}`
   );
 });
 
@@ -50,7 +45,6 @@ export const getCurrentUserIdentities = cache(async (): Promise<UserIdentity[]> 
   await requireAuth();
 
   return await apiClient<UserIdentity[]>(
-    `${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.IDENTITIES}`,
-    { next: { tags: ['user-identities'] } }
+    `${API_ROUTES.USERS.USERS}/${API_ROUTES.USERS.IDENTITIES}`
   );
 });

@@ -1,7 +1,6 @@
 import { API_ROUTES } from '@/constants/constants';
 import { apiClient } from '@/libs/api-client.lib';
 import { auth0 } from '@/libs/auth0.lib';
-import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -25,8 +24,6 @@ export async function POST(request: NextRequest) {
         body: { provider: provider, idToken: secondaryIdToken },
       }
     );
-
-    revalidateTag('user-identities', 'max');
 
     return NextResponse.json({ message: 'Linking successful' }, { status: 200 });
   } catch (error) {

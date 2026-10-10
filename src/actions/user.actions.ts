@@ -21,7 +21,6 @@ import {
 } from '@/services/user.service';
 
 import { CurrentUser, UserPreferencesUpdate, UserProfileUpdate } from '@/types/user.type';
-import { updateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 
 export async function getCurrentUserAction(): Promise<CurrentUser | null> {
@@ -36,8 +35,6 @@ export async function updateCurrentUserProfileAction(
   profileData: UserProfileUpdate
 ): Promise<void> {
   await updateCurrentUserProfile(profileData);
-
-  updateTag('user-profile');
 }
 
 export async function getCurrentUserPreferencesAction(): Promise<UserPreference> {
@@ -71,8 +68,6 @@ export async function updateCurrentUserPreferencesAction(
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
   });
-
-  updateTag('user-preferences');
 }
 
 export async function getCurrentUserIdentitiesAction(): Promise<UserIdentity[]> {
@@ -81,18 +76,12 @@ export async function getCurrentUserIdentitiesAction(): Promise<UserIdentity[]> 
 
 export async function deleteCurrentUserAction() {
   await deleteCurrentUser();
-
-  updateTag('user');
 }
 
 export async function requestClearDeleteForCurrentUserAction(): Promise<void> {
   await requestClearDeleteForCurrentUser();
-
-  updateTag('user');
 }
 
 export async function deleteLinkedAccountAction(provider: string): Promise<void> {
   await deleteLinkedAccount(provider);
-
-  updateTag('user-identities');
 }

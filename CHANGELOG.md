@@ -1,5 +1,19 @@
 # synex-client
 
+## 0.1.2
+
+### Patch Changes
+
+- [#11](https://github.com/Vestels/synex-client/pull/11) [`1f3f50f`](https://github.com/Vestels/synex-client/commit/1f3f50f16a8e9dbee54eabf3afd7c2012c59276d) - initial bootstrap including:
+
+  - Integrated Auth0 with advanced identity linking and unlinking flows
+  - Implemented a mock server environment for comprehensive API route testing
+  - Extended core user API with brand new endpoints and data layers
+  - Enhanced global UI/UX aesthetics, responsiveness, and localized routing behavior
+  - Streamlined project structure with atomic components and file reorganizations
+  - Configured code quality checks with ESLint, Prettier, Husky, and GitHub Actions
+  - Wrap changesets publish command in bash shell wrapper
+
 ## 0.1.1
 
 ### Patch Changes

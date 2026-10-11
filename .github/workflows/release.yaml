@@ -40,7 +40,7 @@ jobs:
         uses: changesets/action@v1
         with:
           version: pnpm changeset version
-          publish: pnpm changeset tag && gh release create "v$(node -p "require('./package.json').version")" --generate-notes
+          publish: bash -c "pnpm changeset tag && gh release create v\$(node -p \"require('./package.json').version\") --generate-notes"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

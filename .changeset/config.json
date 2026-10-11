@@ -10,7 +10,7 @@
       "disableThanks": true
     }
   ],
-  "commit": "chore(release): version packages",
+  "commit": false,
   "ignore": [],
   "fixed": [],
   "linked": [],
